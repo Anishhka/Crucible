@@ -106,11 +106,12 @@ jobs:
           if [ ! -d tests/fixtures/public ]; then
             echo "::notice::fixtures not vendored; skipping"; exit 0
           fi
-          mkdir -p out
-          chmod 0777 out
           fail=0
           check() {
-            rm -rf out/*; set +e
+            sudo rm -rf out
+            mkdir -p out
+            chmod 0777 out
+            set +e
             docker run --rm --user 10001:10001 --read-only \
               --tmpfs /tmp:rw,noexec,nosuid,nodev,size=512m \
               --cap-drop ALL --security-opt no-new-privileges=true \
@@ -135,7 +136,8 @@ jobs:
         run: |
           if [ ! -d tests/fixtures/public ]; then exit 0; fi
           run_once() {
-            rm -rf "$1"; mkdir -p "$1"
+            sudo rm -rf "$1"
+            mkdir -p "$1"
             chmod 0777 "$1"
             docker run --rm --user 10001:10001 --read-only \
               --tmpfs /tmp:rw,noexec,nosuid,nodev,size=512m \
@@ -156,6 +158,7 @@ jobs:
       - name: Lineage and cross-run aggregation
         run: |
           if [ ! -d tests/fixtures/public ]; then exit 0; fi
+          sudo rm -rf r1 r2 agg
           mkdir -p r1 r2 agg
           chmod 0777 r1 r2 agg
           for pair in "01_baseline r1 2026-01-01" "02_messy r2 2026-02-01"; do
