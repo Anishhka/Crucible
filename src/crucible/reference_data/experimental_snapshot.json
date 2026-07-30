@@ -1,0 +1,1103 @@
+{
+  "corpus_id": "experimental_snapshot",
+  "corpus_version": "2026.03-r1",
+  "coverage_note": "Hand-curated list of well-established inorganic compounds with experimental provenance: common binary and ternary oxides, halides, sulfides, nitrides, carbides, borides, perovskites, spinels, garnets, common battery and superconductor phases, and elemental metals. It is NOT an extract of any crystallographic database and covers a few hundred compositions out of the hundreds of thousands that have been reported. A miss is evidence of absence from THIS list only and must not be read as evidence of novelty.",
+  "entries": [
+    {
+      "identifier": "exp-00060",
+      "key": "Ag:1|Cl:1",
+      "note": "chlorargyrite",
+      "provenance": "experimental",
+      "reduced_formula": "AgCl"
+    },
+    {
+      "identifier": "exp-00036",
+      "key": "Ag:2|O:1",
+      "note": "silver oxide",
+      "provenance": "experimental",
+      "reduced_formula": "Ag2O"
+    },
+    {
+      "identifier": "exp-00037",
+      "key": "Ag:2|S:1",
+      "note": "acanthite",
+      "provenance": "experimental",
+      "reduced_formula": "Ag2S"
+    },
+    {
+      "identifier": "exp-00126",
+      "key": "Al:1",
+      "note": "aluminium metal",
+      "provenance": "experimental",
+      "reduced_formula": "Al"
+    },
+    {
+      "identifier": "exp-00109",
+      "key": "Al:1|La:1|O:3",
+      "note": "lanthanum aluminate",
+      "provenance": "experimental",
+      "reduced_formula": "LaAlO3"
+    },
+    {
+      "identifier": "exp-00045",
+      "key": "Al:1|N:1",
+      "note": "aluminium nitride",
+      "provenance": "experimental",
+      "reduced_formula": "AlN"
+    },
+    {
+      "identifier": "exp-00136",
+      "key": "Al:1|Ni:3",
+      "note": "superalloy gamma-prime phase",
+      "provenance": "experimental",
+      "reduced_formula": "Ni3Al"
+    },
+    {
+      "identifier": "exp-00092",
+      "key": "Al:1|O:4|P:1",
+      "note": "berlinite",
+      "provenance": "experimental",
+      "reduced_formula": "AlPO4"
+    },
+    {
+      "identifier": "exp-00138",
+      "key": "Al:1|Ti:1",
+      "note": "titanium aluminide",
+      "provenance": "experimental",
+      "reduced_formula": "TiAl"
+    },
+    {
+      "identifier": "exp-00099",
+      "key": "Al:2|Fe:1|O:4",
+      "note": "hercynite",
+      "provenance": "experimental",
+      "reduced_formula": "FeAl2O4"
+    },
+    {
+      "identifier": "exp-00098",
+      "key": "Al:2|Mg:1|O:4",
+      "note": "spinel",
+      "provenance": "experimental",
+      "reduced_formula": "MgAl2O4"
+    },
+    {
+      "identifier": "exp-00007",
+      "key": "Al:2|O:3",
+      "note": "corundum",
+      "provenance": "experimental",
+      "reduced_formula": "Al2O3"
+    },
+    {
+      "identifier": "exp-00100",
+      "key": "Al:2|O:4|Zn:1",
+      "note": "gahnite",
+      "provenance": "experimental",
+      "reduced_formula": "ZnAl2O4"
+    },
+    {
+      "identifier": "exp-00120",
+      "key": "Al:5|O:12|Y:3",
+      "note": "YAG garnet",
+      "provenance": "experimental",
+      "reduced_formula": "Y3Al5O12"
+    },
+    {
+      "identifier": "exp-00153",
+      "key": "As:1|Ga:1",
+      "note": "gallium arsenide",
+      "provenance": "experimental",
+      "reduced_formula": "GaAs"
+    },
+    {
+      "identifier": "exp-00133",
+      "key": "B:1",
+      "note": "boron",
+      "provenance": "experimental",
+      "reduced_formula": "B"
+    },
+    {
+      "identifier": "exp-00048",
+      "key": "B:1|N:1",
+      "note": "boron nitride",
+      "provenance": "experimental",
+      "reduced_formula": "BN"
+    },
+    {
+      "identifier": "exp-00006",
+      "key": "B:2|Mg:1",
+      "note": "magnesium diboride superconductor",
+      "provenance": "experimental",
+      "reduced_formula": "MgB2"
+    },
+    {
+      "identifier": "exp-00146",
+      "key": "B:2|Ti:1",
+      "note": "titanium diboride",
+      "provenance": "experimental",
+      "reduced_formula": "TiB2"
+    },
+    {
+      "identifier": "exp-00147",
+      "key": "B:2|Zr:1",
+      "note": "zirconium diboride",
+      "provenance": "experimental",
+      "reduced_formula": "ZrB2"
+    },
+    {
+      "identifier": "exp-00052",
+      "key": "B:4|C:1",
+      "note": "boron carbide",
+      "provenance": "experimental",
+      "reduced_formula": "B4C"
+    },
+    {
+      "identifier": "exp-00144",
+      "key": "B:6|Ca:1",
+      "note": "calcium hexaboride",
+      "provenance": "experimental",
+      "reduced_formula": "CaB6"
+    },
+    {
+      "identifier": "exp-00145",
+      "key": "B:6|La:1",
+      "note": "lanthanum hexaboride",
+      "provenance": "experimental",
+      "reduced_formula": "LaB6"
+    },
+    {
+      "identifier": "exp-00083",
+      "key": "Ba:1|C:1|O:3",
+      "note": "witherite precursor",
+      "provenance": "experimental",
+      "reduced_formula": "BaCO3"
+    },
+    {
+      "identifier": "exp-00054",
+      "key": "Ba:1|F:2",
+      "note": "barium fluoride",
+      "provenance": "experimental",
+      "reduced_formula": "BaF2"
+    },
+    {
+      "identifier": "exp-00104",
+      "key": "Ba:1|Fe:12|O:19",
+      "note": "barium hexaferrite",
+      "provenance": "experimental",
+      "reduced_formula": "BaFe12O19"
+    },
+    {
+      "identifier": "exp-00076",
+      "key": "Ba:1|O:1",
+      "note": "barium oxide",
+      "provenance": "experimental",
+      "reduced_formula": "BaO"
+    },
+    {
+      "identifier": "exp-00015",
+      "key": "Ba:1|O:3|Ti:1",
+      "note": "barium titanate perovskite",
+      "provenance": "experimental",
+      "reduced_formula": "BaTiO3"
+    },
+    {
+      "identifier": "exp-00087",
+      "key": "Ba:1|O:4|S:1",
+      "note": "barite",
+      "provenance": "experimental",
+      "reduced_formula": "BaSO4"
+    },
+    {
+      "identifier": "exp-00022",
+      "key": "Ba:2|Cu:3|O:7|Y:1",
+      "note": "YBCO superconductor",
+      "provenance": "experimental",
+      "reduced_formula": "YBa2Cu3O7"
+    },
+    {
+      "identifier": "exp-00117",
+      "key": "Ba:2|Nb:1|O:6|Sc:1",
+      "note": "ordered double perovskite",
+      "provenance": "experimental",
+      "reduced_formula": "Ba2ScNbO6"
+    },
+    {
+      "identifier": "exp-00115",
+      "key": "Bi:1|Fe:1|O:3",
+      "note": "multiferroic perovskite",
+      "provenance": "experimental",
+      "reduced_formula": "BiFeO3"
+    },
+    {
+      "identifier": "exp-00073",
+      "key": "Bi:2|O:3",
+      "note": "bismite",
+      "provenance": "experimental",
+      "reduced_formula": "Bi2O3"
+    },
+    {
+      "identifier": "exp-00149",
+      "key": "Bi:2|Te:3",
+      "note": "thermoelectric telluride",
+      "provenance": "experimental",
+      "reduced_formula": "Bi2Te3"
+    },
+    {
+      "identifier": "exp-00058",
+      "key": "Br:1|K:1",
+      "note": "potassium bromide",
+      "provenance": "experimental",
+      "reduced_formula": "KBr"
+    },
+    {
+      "identifier": "exp-00132",
+      "key": "C:1",
+      "note": "graphite / diamond",
+      "provenance": "experimental",
+      "reduced_formula": "C"
+    },
+    {
+      "identifier": "exp-00012",
+      "key": "C:1|Ca:1|O:3",
+      "note": "calcite",
+      "provenance": "experimental",
+      "reduced_formula": "CaCO3"
+    },
+    {
+      "identifier": "exp-00137",
+      "key": "C:1|Fe:3",
+      "note": "cementite",
+      "provenance": "experimental",
+      "reduced_formula": "Fe3C"
+    },
+    {
+      "identifier": "exp-00081",
+      "key": "C:1|Li:2|O:3",
+      "note": "lithium carbonate precursor",
+      "provenance": "experimental",
+      "reduced_formula": "Li2CO3"
+    },
+    {
+      "identifier": "exp-00085",
+      "key": "C:1|Mg:1|O:3",
+      "note": "magnesite",
+      "provenance": "experimental",
+      "reduced_formula": "MgCO3"
+    },
+    {
+      "identifier": "exp-00082",
+      "key": "C:1|Na:2|O:3",
+      "note": "sodium carbonate",
+      "provenance": "experimental",
+      "reduced_formula": "Na2CO3"
+    },
+    {
+      "identifier": "exp-00084",
+      "key": "C:1|O:3|Sr:1",
+      "note": "strontianite precursor",
+      "provenance": "experimental",
+      "reduced_formula": "SrCO3"
+    },
+    {
+      "identifier": "exp-00049",
+      "key": "C:1|Si:1",
+      "note": "moissanite",
+      "provenance": "experimental",
+      "reduced_formula": "SiC"
+    },
+    {
+      "identifier": "exp-00142",
+      "key": "C:1|Ta:1",
+      "note": "tantalum carbide",
+      "provenance": "experimental",
+      "reduced_formula": "TaC"
+    },
+    {
+      "identifier": "exp-00051",
+      "key": "C:1|Ti:1",
+      "note": "titanium carbide",
+      "provenance": "experimental",
+      "reduced_formula": "TiC"
+    },
+    {
+      "identifier": "exp-00143",
+      "key": "C:1|V:1",
+      "note": "vanadium carbide",
+      "provenance": "experimental",
+      "reduced_formula": "VC"
+    },
+    {
+      "identifier": "exp-00050",
+      "key": "C:1|W:1",
+      "note": "tungsten carbide",
+      "provenance": "experimental",
+      "reduced_formula": "WC"
+    },
+    {
+      "identifier": "exp-00053",
+      "key": "Ca:1|F:2",
+      "note": "fluorite",
+      "provenance": "experimental",
+      "reduced_formula": "CaF2"
+    },
+    {
+      "identifier": "exp-00013",
+      "key": "Ca:1|O:1",
+      "note": "lime",
+      "provenance": "experimental",
+      "reduced_formula": "CaO"
+    },
+    {
+      "identifier": "exp-00096",
+      "key": "Ca:1|O:3|Si:1",
+      "note": "wollastonite",
+      "provenance": "experimental",
+      "reduced_formula": "CaSiO3"
+    },
+    {
+      "identifier": "exp-00017",
+      "key": "Ca:1|O:3|Ti:1",
+      "note": "perovskite",
+      "provenance": "experimental",
+      "reduced_formula": "CaTiO3"
+    },
+    {
+      "identifier": "exp-00086",
+      "key": "Ca:1|O:4|S:1",
+      "note": "anhydrite",
+      "provenance": "experimental",
+      "reduced_formula": "CaSO4"
+    },
+    {
+      "identifier": "exp-00039",
+      "key": "Cd:1|S:1",
+      "note": "greenockite",
+      "provenance": "experimental",
+      "reduced_formula": "CdS"
+    },
+    {
+      "identifier": "exp-00152",
+      "key": "Cd:1|Te:1",
+      "note": "cadmium telluride",
+      "provenance": "experimental",
+      "reduced_formula": "CdTe"
+    },
+    {
+      "identifier": "exp-00067",
+      "key": "Ce:1|O:2",
+      "note": "ceria",
+      "provenance": "experimental",
+      "reduced_formula": "CeO2"
+    },
+    {
+      "identifier": "exp-00011",
+      "key": "Cl:1|K:1",
+      "note": "sylvite",
+      "provenance": "experimental",
+      "reduced_formula": "KCl"
+    },
+    {
+      "identifier": "exp-00010",
+      "key": "Cl:1|Na:1",
+      "note": "halite",
+      "provenance": "experimental",
+      "reduced_formula": "NaCl"
+    },
+    {
+      "identifier": "exp-00061",
+      "key": "Cl:2|Cu:1",
+      "note": "tolbachite",
+      "provenance": "experimental",
+      "reduced_formula": "CuCl2"
+    },
+    {
+      "identifier": "exp-00062",
+      "key": "Cl:3|Fe:1",
+      "note": "molysite",
+      "provenance": "experimental",
+      "reduced_formula": "FeCl3"
+    },
+    {
+      "identifier": "exp-00102",
+      "key": "Co:1|Fe:2|O:4",
+      "note": "cobalt ferrite",
+      "provenance": "experimental",
+      "reduced_formula": "CoFe2O4"
+    },
+    {
+      "identifier": "exp-00107",
+      "key": "Co:1|La:1|O:3",
+      "note": "lanthanum cobaltite",
+      "provenance": "experimental",
+      "reduced_formula": "LaCoO3"
+    },
+    {
+      "identifier": "exp-00019",
+      "key": "Co:1|Li:1|O:2",
+      "note": "layered cobalt oxide cathode",
+      "provenance": "experimental",
+      "reduced_formula": "LiCoO2"
+    },
+    {
+      "identifier": "exp-00032",
+      "key": "Co:3|O:4",
+      "note": "cobalt spinel",
+      "provenance": "experimental",
+      "reduced_formula": "Co3O4"
+    },
+    {
+      "identifier": "exp-00139",
+      "key": "Cr:1|N:1",
+      "note": "chromium nitride",
+      "provenance": "experimental",
+      "reduced_formula": "CrN"
+    },
+    {
+      "identifier": "exp-00028",
+      "key": "Cr:2|O:3",
+      "note": "eskolaite",
+      "provenance": "experimental",
+      "reduced_formula": "Cr2O3"
+    },
+    {
+      "identifier": "exp-00128",
+      "key": "Cu:1",
+      "note": "copper metal",
+      "provenance": "experimental",
+      "reduced_formula": "Cu"
+    },
+    {
+      "identifier": "exp-00155",
+      "key": "Cu:1|In:1|Se:2",
+      "note": "chalcopyrite absorber",
+      "provenance": "experimental",
+      "reduced_formula": "CuInSe2"
+    },
+    {
+      "identifier": "exp-00023",
+      "key": "Cu:1|La:2|O:4",
+      "note": "cuprate parent compound",
+      "provenance": "experimental",
+      "reduced_formula": "La2CuO4"
+    },
+    {
+      "identifier": "exp-00034",
+      "key": "Cu:1|O:1",
+      "note": "tenorite",
+      "provenance": "experimental",
+      "reduced_formula": "CuO"
+    },
+    {
+      "identifier": "exp-00088",
+      "key": "Cu:1|O:4|S:1",
+      "note": "chalcocyanite",
+      "provenance": "experimental",
+      "reduced_formula": "CuSO4"
+    },
+    {
+      "identifier": "exp-00035",
+      "key": "Cu:2|O:1",
+      "note": "cuprite",
+      "provenance": "experimental",
+      "reduced_formula": "Cu2O"
+    },
+    {
+      "identifier": "exp-00156",
+      "key": "Cu:2|S:4|Sn:1|Zn:1",
+      "note": "kesterite absorber",
+      "provenance": "experimental",
+      "reduced_formula": "Cu2ZnSnS4"
+    },
+    {
+      "identifier": "exp-00056",
+      "key": "F:1|Li:1",
+      "note": "lithium fluoride",
+      "provenance": "experimental",
+      "reduced_formula": "LiF"
+    },
+    {
+      "identifier": "exp-00057",
+      "key": "F:1|Na:1",
+      "note": "villiaumite",
+      "provenance": "experimental",
+      "reduced_formula": "NaF"
+    },
+    {
+      "identifier": "exp-00055",
+      "key": "F:2|Mg:1",
+      "note": "sellaite",
+      "provenance": "experimental",
+      "reduced_formula": "MgF2"
+    },
+    {
+      "identifier": "exp-00119",
+      "key": "F:4|K:2|Ni:1",
+      "note": "layered fluoride structure type",
+      "provenance": "experimental",
+      "reduced_formula": "K2NiF4"
+    },
+    {
+      "identifier": "exp-00125",
+      "key": "F:6|Li:1|P:1",
+      "note": "electrolyte salt",
+      "provenance": "experimental",
+      "reduced_formula": "LiPF6"
+    },
+    {
+      "identifier": "exp-00127",
+      "key": "Fe:1",
+      "note": "iron metal",
+      "provenance": "experimental",
+      "reduced_formula": "Fe"
+    },
+    {
+      "identifier": "exp-00106",
+      "key": "Fe:1|La:1|O:3",
+      "note": "lanthanum ferrite",
+      "provenance": "experimental",
+      "reduced_formula": "LaFeO3"
+    },
+    {
+      "identifier": "exp-00005",
+      "key": "Fe:1|Li:1|O:4|P:1",
+      "note": "olivine cathode phosphate",
+      "provenance": "experimental",
+      "reduced_formula": "LiFePO4"
+    },
+    {
+      "identifier": "exp-00118",
+      "key": "Fe:1|Mo:1|O:6|Sr:2",
+      "note": "double perovskite",
+      "provenance": "experimental",
+      "reduced_formula": "Sr2FeMoO6"
+    },
+    {
+      "identifier": "exp-00004",
+      "key": "Fe:1|O:1",
+      "note": "wuestite",
+      "provenance": "experimental",
+      "reduced_formula": "FeO"
+    },
+    {
+      "identifier": "exp-00041",
+      "key": "Fe:1|S:2",
+      "note": "pyrite",
+      "provenance": "experimental",
+      "reduced_formula": "FeS2"
+    },
+    {
+      "identifier": "exp-00101",
+      "key": "Fe:2|Ni:1|O:4",
+      "note": "trevorite",
+      "provenance": "experimental",
+      "reduced_formula": "NiFe2O4"
+    },
+    {
+      "identifier": "exp-00002",
+      "key": "Fe:2|O:3",
+      "note": "hematite",
+      "provenance": "experimental",
+      "reduced_formula": "Fe2O3"
+    },
+    {
+      "identifier": "exp-00095",
+      "key": "Fe:2|O:4|Si:1",
+      "note": "fayalite",
+      "provenance": "experimental",
+      "reduced_formula": "Fe2SiO4"
+    },
+    {
+      "identifier": "exp-00103",
+      "key": "Fe:2|O:4|Zn:1",
+      "note": "franklinite",
+      "provenance": "experimental",
+      "reduced_formula": "ZnFe2O4"
+    },
+    {
+      "identifier": "exp-00003",
+      "key": "Fe:3|O:4",
+      "note": "magnetite",
+      "provenance": "experimental",
+      "reduced_formula": "Fe3O4"
+    },
+    {
+      "identifier": "exp-00121",
+      "key": "Fe:5|O:12|Y:3",
+      "note": "YIG garnet ferrite",
+      "provenance": "experimental",
+      "reduced_formula": "Y3Fe5O12"
+    },
+    {
+      "identifier": "exp-00046",
+      "key": "Ga:1|N:1",
+      "note": "gallium nitride",
+      "provenance": "experimental",
+      "reduced_formula": "GaN"
+    },
+    {
+      "identifier": "exp-00069",
+      "key": "Ga:2|O:3",
+      "note": "gallium oxide",
+      "provenance": "experimental",
+      "reduced_formula": "Ga2O3"
+    },
+    {
+      "identifier": "exp-00123",
+      "key": "Ge:1|Li:10|P:2|S:12",
+      "note": "superionic sulfide conductor",
+      "provenance": "experimental",
+      "reduced_formula": "Li10GeP2S12"
+    },
+    {
+      "identifier": "exp-00075",
+      "key": "Ge:1|O:2",
+      "note": "argutite",
+      "provenance": "experimental",
+      "reduced_formula": "GeO2"
+    },
+    {
+      "identifier": "exp-00064",
+      "key": "Hf:1|O:2",
+      "note": "hafnia",
+      "provenance": "experimental",
+      "reduced_formula": "HfO2"
+    },
+    {
+      "identifier": "exp-00059",
+      "key": "I:1|Na:1",
+      "note": "sodium iodide",
+      "provenance": "experimental",
+      "reduced_formula": "NaI"
+    },
+    {
+      "identifier": "exp-00154",
+      "key": "In:1|P:1",
+      "note": "indium phosphide",
+      "provenance": "experimental",
+      "reduced_formula": "InP"
+    },
+    {
+      "identifier": "exp-00070",
+      "key": "In:2|O:3",
+      "note": "indium oxide",
+      "provenance": "experimental",
+      "reduced_formula": "In2O3"
+    },
+    {
+      "identifier": "exp-00090",
+      "key": "K:1|N:1|O:3",
+      "note": "niter",
+      "provenance": "experimental",
+      "reduced_formula": "KNO3"
+    },
+    {
+      "identifier": "exp-00111",
+      "key": "K:1|Nb:1|O:3",
+      "note": "potassium niobate",
+      "provenance": "experimental",
+      "reduced_formula": "KNbO3"
+    },
+    {
+      "identifier": "exp-00080",
+      "key": "K:2|O:1",
+      "note": "potassium oxide",
+      "provenance": "experimental",
+      "reduced_formula": "K2O"
+    },
+    {
+      "identifier": "exp-00105",
+      "key": "La:1|Mn:1|O:3",
+      "note": "lanthanum manganite",
+      "provenance": "experimental",
+      "reduced_formula": "LaMnO3"
+    },
+    {
+      "identifier": "exp-00108",
+      "key": "La:1|Ni:1|O:3",
+      "note": "lanthanum nickelate",
+      "provenance": "experimental",
+      "reduced_formula": "LaNiO3"
+    },
+    {
+      "identifier": "exp-00066",
+      "key": "La:2|O:3",
+      "note": "lanthana",
+      "provenance": "experimental",
+      "reduced_formula": "La2O3"
+    },
+    {
+      "identifier": "exp-00122",
+      "key": "La:3|Li:7|O:12|Zr:2",
+      "note": "garnet solid electrolyte",
+      "provenance": "experimental",
+      "reduced_formula": "Li7La3Zr2O12"
+    },
+    {
+      "identifier": "exp-00020",
+      "key": "Li:1|Mn:2|O:4",
+      "note": "spinel manganese oxide cathode",
+      "provenance": "experimental",
+      "reduced_formula": "LiMn2O4"
+    },
+    {
+      "identifier": "exp-00113",
+      "key": "Li:1|Nb:1|O:3",
+      "note": "lithium niobate",
+      "provenance": "experimental",
+      "reduced_formula": "LiNbO3"
+    },
+    {
+      "identifier": "exp-00021",
+      "key": "Li:1|Ni:1|O:2",
+      "note": "layered nickel oxide",
+      "provenance": "experimental",
+      "reduced_formula": "LiNiO2"
+    },
+    {
+      "identifier": "exp-00114",
+      "key": "Li:1|O:3|Ta:1",
+      "note": "lithium tantalate",
+      "provenance": "experimental",
+      "reduced_formula": "LiTaO3"
+    },
+    {
+      "identifier": "exp-00078",
+      "key": "Li:2|O:1",
+      "note": "lithium oxide",
+      "provenance": "experimental",
+      "reduced_formula": "Li2O"
+    },
+    {
+      "identifier": "exp-00124",
+      "key": "Li:3|O:4|P:1",
+      "note": "lithium phosphate",
+      "provenance": "experimental",
+      "reduced_formula": "Li3PO4"
+    },
+    {
+      "identifier": "exp-00130",
+      "key": "Mg:1",
+      "note": "magnesium metal",
+      "provenance": "experimental",
+      "reduced_formula": "Mg"
+    },
+    {
+      "identifier": "exp-00014",
+      "key": "Mg:1|O:1",
+      "note": "periclase",
+      "provenance": "experimental",
+      "reduced_formula": "MgO"
+    },
+    {
+      "identifier": "exp-00097",
+      "key": "Mg:1|O:3|Si:1",
+      "note": "enstatite",
+      "provenance": "experimental",
+      "reduced_formula": "MgSiO3"
+    },
+    {
+      "identifier": "exp-00089",
+      "key": "Mg:1|O:4|S:1",
+      "note": "magnesium sulfate",
+      "provenance": "experimental",
+      "reduced_formula": "MgSO4"
+    },
+    {
+      "identifier": "exp-00094",
+      "key": "Mg:2|O:4|Si:1",
+      "note": "forsterite",
+      "provenance": "experimental",
+      "reduced_formula": "Mg2SiO4"
+    },
+    {
+      "identifier": "exp-00148",
+      "key": "Mg:2|Si:1",
+      "note": "magnesium silicide",
+      "provenance": "experimental",
+      "reduced_formula": "Mg2Si"
+    },
+    {
+      "identifier": "exp-00029",
+      "key": "Mn:1|O:2",
+      "note": "pyrolusite",
+      "provenance": "experimental",
+      "reduced_formula": "MnO2"
+    },
+    {
+      "identifier": "exp-00116",
+      "key": "Mn:1|O:3|Y:1",
+      "note": "hexagonal manganite",
+      "provenance": "experimental",
+      "reduced_formula": "YMnO3"
+    },
+    {
+      "identifier": "exp-00030",
+      "key": "Mn:2|O:3",
+      "note": "bixbyite",
+      "provenance": "experimental",
+      "reduced_formula": "Mn2O3"
+    },
+    {
+      "identifier": "exp-00031",
+      "key": "Mn:3|O:4",
+      "note": "hausmannite",
+      "provenance": "experimental",
+      "reduced_formula": "Mn3O4"
+    },
+    {
+      "identifier": "exp-00027",
+      "key": "Mo:1|O:3",
+      "note": "molybdenum trioxide",
+      "provenance": "experimental",
+      "reduced_formula": "MoO3"
+    },
+    {
+      "identifier": "exp-00042",
+      "key": "Mo:1|S:2",
+      "note": "molybdenite",
+      "provenance": "experimental",
+      "reduced_formula": "MoS2"
+    },
+    {
+      "identifier": "exp-00091",
+      "key": "N:1|Na:1|O:3",
+      "note": "nitratine",
+      "provenance": "experimental",
+      "reduced_formula": "NaNO3"
+    },
+    {
+      "identifier": "exp-00044",
+      "key": "N:1|Ti:1",
+      "note": "osbornite",
+      "provenance": "experimental",
+      "reduced_formula": "TiN"
+    },
+    {
+      "identifier": "exp-00140",
+      "key": "N:1|V:1",
+      "note": "vanadium nitride",
+      "provenance": "experimental",
+      "reduced_formula": "VN"
+    },
+    {
+      "identifier": "exp-00141",
+      "key": "N:1|Zr:1",
+      "note": "zirconium nitride",
+      "provenance": "experimental",
+      "reduced_formula": "ZrN"
+    },
+    {
+      "identifier": "exp-00047",
+      "key": "N:4|Si:3",
+      "note": "silicon nitride",
+      "provenance": "experimental",
+      "reduced_formula": "Si3N4"
+    },
+    {
+      "identifier": "exp-00112",
+      "key": "Na:1|Nb:1|O:3",
+      "note": "sodium niobate",
+      "provenance": "experimental",
+      "reduced_formula": "NaNbO3"
+    },
+    {
+      "identifier": "exp-00079",
+      "key": "Na:2|O:1",
+      "note": "sodium oxide",
+      "provenance": "experimental",
+      "reduced_formula": "Na2O"
+    },
+    {
+      "identifier": "exp-00135",
+      "key": "Nb:1|Ti:1",
+      "note": "niobium-titanium alloy",
+      "provenance": "experimental",
+      "reduced_formula": "NbTi"
+    },
+    {
+      "identifier": "exp-00024",
+      "key": "Nb:2|O:5",
+      "note": "niobium pentoxide",
+      "provenance": "experimental",
+      "reduced_formula": "Nb2O5"
+    },
+    {
+      "identifier": "exp-00134",
+      "key": "Nb:3|Sn:1",
+      "note": "A15 superconductor",
+      "provenance": "experimental",
+      "reduced_formula": "Nb3Sn"
+    },
+    {
+      "identifier": "exp-00033",
+      "key": "Ni:1|O:1",
+      "note": "bunsenite",
+      "provenance": "experimental",
+      "reduced_formula": "NiO"
+    },
+    {
+      "identifier": "exp-00072",
+      "key": "O:1|Pb:1",
+      "note": "litharge",
+      "provenance": "experimental",
+      "reduced_formula": "PbO"
+    },
+    {
+      "identifier": "exp-00077",
+      "key": "O:1|Sr:1",
+      "note": "strontium oxide",
+      "provenance": "experimental",
+      "reduced_formula": "SrO"
+    },
+    {
+      "identifier": "exp-00009",
+      "key": "O:1|Zn:1",
+      "note": "zincite",
+      "provenance": "experimental",
+      "reduced_formula": "ZnO"
+    },
+    {
+      "identifier": "exp-00008",
+      "key": "O:2|Si:1",
+      "note": "quartz",
+      "provenance": "experimental",
+      "reduced_formula": "SiO2"
+    },
+    {
+      "identifier": "exp-00071",
+      "key": "O:2|Sn:1",
+      "note": "cassiterite",
+      "provenance": "experimental",
+      "reduced_formula": "SnO2"
+    },
+    {
+      "identifier": "exp-00001",
+      "key": "O:2|Ti:1",
+      "note": "rutile / anatase titanium dioxide",
+      "provenance": "experimental",
+      "reduced_formula": "TiO2"
+    },
+    {
+      "identifier": "exp-00063",
+      "key": "O:2|Zr:1",
+      "note": "baddeleyite / zirconia",
+      "provenance": "experimental",
+      "reduced_formula": "ZrO2"
+    },
+    {
+      "identifier": "exp-00018",
+      "key": "O:3|Pb:1|Ti:1",
+      "note": "lead titanate",
+      "provenance": "experimental",
+      "reduced_formula": "PbTiO3"
+    },
+    {
+      "identifier": "exp-00110",
+      "key": "O:3|Ru:1|Sr:1",
+      "note": "strontium ruthenate",
+      "provenance": "experimental",
+      "reduced_formula": "SrRuO3"
+    },
+    {
+      "identifier": "exp-00074",
+      "key": "O:3|Sb:2",
+      "note": "senarmontite",
+      "provenance": "experimental",
+      "reduced_formula": "Sb2O3"
+    },
+    {
+      "identifier": "exp-00068",
+      "key": "O:3|Sc:2",
+      "note": "scandia",
+      "provenance": "experimental",
+      "reduced_formula": "Sc2O3"
+    },
+    {
+      "identifier": "exp-00016",
+      "key": "O:3|Sr:1|Ti:1",
+      "note": "strontium titanate perovskite",
+      "provenance": "experimental",
+      "reduced_formula": "SrTiO3"
+    },
+    {
+      "identifier": "exp-00026",
+      "key": "O:3|W:1",
+      "note": "tungsten trioxide",
+      "provenance": "experimental",
+      "reduced_formula": "WO3"
+    },
+    {
+      "identifier": "exp-00065",
+      "key": "O:3|Y:2",
+      "note": "yttria",
+      "provenance": "experimental",
+      "reduced_formula": "Y2O3"
+    },
+    {
+      "identifier": "exp-00093",
+      "key": "O:4|Si:1|Zr:1",
+      "note": "zircon",
+      "provenance": "experimental",
+      "reduced_formula": "ZrSiO4"
+    },
+    {
+      "identifier": "exp-00025",
+      "key": "O:5|V:2",
+      "note": "vanadium pentoxide",
+      "provenance": "experimental",
+      "reduced_formula": "V2O5"
+    },
+    {
+      "identifier": "exp-00040",
+      "key": "Pb:1|S:1",
+      "note": "galena",
+      "provenance": "experimental",
+      "reduced_formula": "PbS"
+    },
+    {
+      "identifier": "exp-00150",
+      "key": "Pb:1|Te:1",
+      "note": "lead telluride",
+      "provenance": "experimental",
+      "reduced_formula": "PbTe"
+    },
+    {
+      "identifier": "exp-00038",
+      "key": "S:1|Zn:1",
+      "note": "sphalerite / wurtzite",
+      "provenance": "experimental",
+      "reduced_formula": "ZnS"
+    },
+    {
+      "identifier": "exp-00043",
+      "key": "S:2|W:1",
+      "note": "tungstenite",
+      "provenance": "experimental",
+      "reduced_formula": "WS2"
+    },
+    {
+      "identifier": "exp-00151",
+      "key": "Se:1|Sn:1",
+      "note": "tin selenide",
+      "provenance": "experimental",
+      "reduced_formula": "SnSe"
+    },
+    {
+      "identifier": "exp-00131",
+      "key": "Si:1",
+      "note": "silicon",
+      "provenance": "experimental",
+      "reduced_formula": "Si"
+    },
+    {
+      "identifier": "exp-00129",
+      "key": "Ti:1",
+      "note": "titanium metal",
+      "provenance": "experimental",
+      "reduced_formula": "Ti"
+    }
+  ],
+  "evidence_class": "experimental",
+  "kind": "snapshot",
+  "license": "CC0-1.0 (hand-authored, no third-party data)",
+  "n_entries": 156
+}

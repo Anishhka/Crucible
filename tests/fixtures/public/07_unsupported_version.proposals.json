@@ -1,0 +1,12 @@
+{
+  "schema_version": "2-0-0",
+  "batch_id": "public-unsupported-version-007",
+  "generator": { "model_id": "matgen-inorganic-next", "prompt_id": "hypothesis.inorganic@3.0.0" },
+  "objective": "Envelope-level defect: a MODEL version this build does not implement. Processing it on the assumption that the parts recognised are still meaningful is exactly what the version field exists to prevent.",
+  "proposals": [
+    {
+      "proposal_id": "V-0001",
+      "composition": { "formula": "TiO2" }
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "corpus_id": "mineral_reference",
+  "corpus_version": "2026.03-r1",
+  "coverage_note": "A small independent mineralogical reference list, overlapping the main experimental snapshot in part and disjoint from it in part. Present so that two sources of the SAME evidence class can disagree, which is the only condition under which NOVEL.EVIDENCE.SOURCES_DISAGREE is a meaningful finding rather than a restatement of the fact that different corpora answer different questions.",
+  "entries": [
+    {
+      "identifier": "min-0020",
+      "key": "Al:1|K:1|O:6|Si:2",
+      "note": "leucite",
+      "provenance": "experimental",
+      "reduced_formula": "KAlSi2O6"
+    },
+    {
+      "identifier": "min-0008",
+      "key": "Al:1|K:1|O:8|Si:3",
+      "note": "orthoclase feldspar",
+      "provenance": "experimental",
+      "reduced_formula": "KAlSi3O8"
+    },
+    {
+      "identifier": "min-0009",
+      "key": "Al:1|Na:1|O:8|Si:3",
+      "note": "albite feldspar",
+      "provenance": "experimental",
+      "reduced_formula": "NaAlSi3O8"
+    },
+    {
+      "identifier": "min-0010",
+      "key": "Al:2|Ca:1|O:8|Si:2",
+      "note": "anorthite feldspar",
+      "provenance": "experimental",
+      "reduced_formula": "CaAl2Si2O8"
+    },
+    {
+      "identifier": "min-0006",
+      "key": "Al:2|Mg:1|O:4",
+      "note": "spinel, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "MgAl2O4"
+    },
+    {
+      "identifier": "min-0007",
+      "key": "Al:2|O:5|Si:1",
+      "note": "kyanite / andalusite / sillimanite",
+      "provenance": "experimental",
+      "reduced_formula": "Al2SiO5"
+    },
+    {
+      "identifier": "min-0014",
+      "key": "Ba:1|O:4|S:1",
+      "note": "barite, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "BaSO4"
+    },
+    {
+      "identifier": "min-0003",
+      "key": "C:1|Ca:1|O:3",
+      "note": "calcite, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "CaCO3"
+    },
+    {
+      "identifier": "min-0016",
+      "key": "Ca:1|F:2",
+      "note": "fluorite, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "CaF2"
+    },
+    {
+      "identifier": "min-0019",
+      "key": "Ca:1|Mg:1|O:6|Si:2",
+      "note": "diopside",
+      "provenance": "experimental",
+      "reduced_formula": "CaMgSi2O6"
+    },
+    {
+      "identifier": "min-0015",
+      "key": "Ca:1|O:4|S:1",
+      "note": "anhydrite, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "CaSO4"
+    },
+    {
+      "identifier": "min-0004",
+      "key": "Cl:1|Na:1",
+      "note": "halite, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "NaCl"
+    },
+    {
+      "identifier": "min-0017",
+      "key": "Cu:2|O:1",
+      "note": "cuprite, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "Cu2O"
+    },
+    {
+      "identifier": "min-0005",
+      "key": "Fe:1|S:2",
+      "note": "pyrite, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "FeS2"
+    },
+    {
+      "identifier": "min-0001",
+      "key": "Fe:2|O:3",
+      "note": "hematite, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "Fe2O3"
+    },
+    {
+      "identifier": "min-0011",
+      "key": "Fe:2|O:4|Si:1",
+      "note": "fayalite, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "Fe2SiO4"
+    },
+    {
+      "identifier": "min-0018",
+      "key": "Mn:1|O:2",
+      "note": "pyrolusite, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "MnO2"
+    },
+    {
+      "identifier": "min-0002",
+      "key": "O:2|Si:1",
+      "note": "quartz, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "SiO2"
+    },
+    {
+      "identifier": "min-0012",
+      "key": "O:2|Ti:1",
+      "note": "rutile, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "TiO2"
+    },
+    {
+      "identifier": "min-0013",
+      "key": "S:1|Zn:1",
+      "note": "sphalerite, mineralogical reference",
+      "provenance": "experimental",
+      "reduced_formula": "ZnS"
+    }
+  ],
+  "evidence_class": "experimental",
+  "kind": "snapshot",
+  "license": "CC0-1.0 (hand-authored, no third-party data)",
+  "n_entries": 20
+}

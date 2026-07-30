@@ -1,0 +1,232 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crucible.spec/schema/proposals.schema.json",
+  "title": "Crucible Generator Proposal Batch",
+  "description": "A batch of candidate inorganic materials emitted by an upstream materials-science language model. This is the ONLY input format Crucible accepts. Note that a file may conform to this schema and still contain semantically hostile content; schema conformance is necessary, not sufficient.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "batch_id", "generator", "proposals"],
+  "properties": {
+    "schema_version": {
+      "description": "SchemaVer MODEL-REVISION-ADDITION. Crucible MUST reject a batch whose MODEL component it does not implement.",
+      "type": "string",
+      "pattern": "^[0-9]+-[0-9]+-[0-9]+$"
+    },
+    "batch_id": {
+      "type": "string",
+      "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$",
+      "maxLength": 64
+    },
+    "created_at": {
+      "description": "RFC 3339 timestamp with an explicit offset. Timezone-naive values MUST be rejected.",
+      "type": "string",
+      "maxLength": 64
+    },
+    "generator": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["model_id", "prompt_id"],
+      "properties": {
+        "model_id": { "type": "string", "maxLength": 128, "pattern": "^[A-Za-z0-9][A-Za-z0-9_.:@/-]{0,127}$" },
+        "prompt_id": {
+          "description": "name@semver identifying the prompt revision that produced this batch.",
+          "type": "string", "maxLength": 128
+        },
+        "prompt_sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "temperature": { "type": "number", "minimum": 0, "maximum": 2 },
+        "top_p": { "type": "number", "minimum": 0, "maximum": 1 },
+        "seed": { "type": "integer", "minimum": 0, "maximum": 9007199254740991 },
+        "decoding_notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "objective": {
+      "description": "What the generator was asked to optimise for. Free text; used to judge whether claimed properties are on-topic.",
+      "type": "string",
+      "maxLength": 4000
+    },
+    "proposals": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 1000,
+      "items": { "$ref": "#/$defs/proposal" }
+    }
+  },
+  "$defs": {
+    "proposal": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proposal_id", "composition"],
+      "properties": {
+        "proposal_id": {
+          "description": "Unique within the batch. Duplicate ids are a violation, not a merge instruction. This value MUST NOT be used to construct a filesystem path without validation.",
+          "type": "string",
+          "pattern": "^[A-Za-z0-9][A-Za-z0-9_.-]{0,63}$",
+          "maxLength": 64
+        },
+        "composition": { "$ref": "#/$defs/composition" },
+        "structure": { "$ref": "#/$defs/structure" },
+        "claimed_properties": {
+          "type": "array",
+          "maxItems": 32,
+          "items": { "$ref": "#/$defs/claimed_property" }
+        },
+        "synthesis_hint": { "$ref": "#/$defs/synthesis_hint" },
+        "intended_application": { "type": "string", "maxLength": 2000 },
+        "rationale": {
+          "description": "The generator's free-text reasoning. Treated as untrusted narrative: never parsed for control flow, never executed, never interpolated into a query or a path.",
+          "type": "string",
+          "maxLength": 8000
+        },
+        "generator_confidence": { "$ref": "#/$defs/generator_confidence" },
+        "references": {
+          "type": "array",
+          "maxItems": 32,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["kind", "value"],
+            "properties": {
+              "kind": { "enum": ["doi", "arxiv", "url", "mp_id", "cod_id", "icsd_id", "free_text"] },
+              "value": { "type": "string", "maxLength": 512 }
+            }
+          }
+        }
+      }
+    },
+    "composition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["formula"],
+      "properties": {
+        "formula": {
+          "description": "Chemical formula as emitted by the generator, VERBATIM and unnormalised. May contain unicode subscripts, homoglyphs, invisible characters, or nonsense. Crucible is responsible for normalising and validating it.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "elements": {
+          "description": "Optional element->stoichiometric-coefficient map asserted by the generator. When present it MAY disagree with `formula`; that disagreement is itself a finding.",
+          "type": "object",
+          "maxProperties": 32,
+          "additionalProperties": { "type": "number" },
+          "propertyNames": { "type": "string", "maxLength": 8 }
+        },
+        "formula_units_per_cell": { "type": "integer", "minimum": 1, "maximum": 1000 },
+        "charge": { "type": "number" }
+      }
+    },
+    "structure": {
+      "description": "Optional. When absent, structure-dependent checks are not applicable and MUST be reported as such rather than silently skipped.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["lattice", "sites"],
+      "properties": {
+        "lattice": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["a", "b", "c", "alpha", "beta", "gamma"],
+          "properties": {
+            "a": { "type": "number" },
+            "b": { "type": "number" },
+            "c": { "type": "number" },
+            "alpha": { "type": "number" },
+            "beta": { "type": "number" },
+            "gamma": { "type": "number" },
+            "length_unit": { "enum": ["angstrom", "nm", "pm", "bohr"], "default": "angstrom" },
+            "angle_unit": { "enum": ["degree", "radian"], "default": "degree" }
+          }
+        },
+        "sites": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 500,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["element", "frac_coords"],
+            "properties": {
+              "element": { "type": "string", "maxLength": 8 },
+              "frac_coords": {
+                "type": "array", "minItems": 3, "maxItems": 3,
+                "items": { "type": "number" }
+              },
+              "occupancy": { "type": "number", "minimum": 0, "maximum": 1, "default": 1 },
+              "oxidation_state": { "type": "number" },
+              "label": { "type": "string", "maxLength": 32 }
+            }
+          }
+        },
+        "space_group": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "symbol": { "type": "string", "maxLength": 32 },
+            "number": { "type": "integer", "minimum": 1, "maximum": 230 },
+            "setting": { "type": "string", "maxLength": 32 }
+          }
+        },
+        "source": {
+          "description": "How the structure was obtained. `generated` means the model invented coordinates and they deserve more scepticism than a `prototype_substitution`.",
+          "enum": ["generated", "prototype_substitution", "relaxed", "experimental", "unknown"]
+        }
+      }
+    },
+    "claimed_property": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "value", "unit"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 64,
+          "pattern": "^[a-z0-9_]{1,64}$"
+        },
+        "value": { "type": "number" },
+        "unit": {
+          "description": "Free-form unit string. Units are NOT guaranteed to be canonical or even consistent between proposals in the same batch.",
+          "type": "string", "maxLength": 32
+        },
+        "uncertainty": { "type": "number", "minimum": 0 },
+        "basis": { "enum": ["predicted", "analogy", "literature", "unknown"] },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "synthesis_hint": {
+      "description": "The generator's own guess at how the material would be made. Crucible must judge whether this hint is thermodynamically coherent with the material, not merely echo it.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "route": {
+          "enum": ["solid_state", "sol_gel", "hydrothermal", "solvothermal", "flux", "cvd", "pvd", "high_pressure", "mechanochemical", "combustion", "unknown"]
+        },
+        "precursors": {
+          "type": "array", "maxItems": 16,
+          "items": { "type": "string", "maxLength": 100 }
+        },
+        "temperature": { "type": "number" },
+        "temperature_unit": { "enum": ["C", "K", "F"] },
+        "pressure_gpa": { "type": "number" },
+        "atmosphere": {
+          "enum": ["air", "O2", "N2", "Ar", "H2", "forming_gas", "NH3", "vacuum", "sealed_ampoule", "CO2", "unknown"]
+        },
+        "duration_hours": { "type": "number", "minimum": 0 },
+        "notes": { "type": "string", "maxLength": 2000 }
+      }
+    },
+    "generator_confidence": {
+      "description": "The generator's self-reported confidence. Pairing these against Crucible's outcomes yields a per-field calibration dataset at zero extra cost.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "overall": { "type": "number", "minimum": 0, "maximum": 1 },
+        "per_field": {
+          "description": "Map of RFC 6901 JSON Pointer (relative to this proposal object) -> confidence in [0,1].",
+          "type": "object",
+          "maxProperties": 64,
+          "additionalProperties": { "type": "number", "minimum": 0, "maximum": 1 },
+          "propertyNames": { "type": "string", "maxLength": 256 }
+        }
+      }
+    }
+  }
+}

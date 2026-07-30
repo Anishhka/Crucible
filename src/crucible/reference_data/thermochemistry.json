@@ -1,0 +1,1179 @@
+{
+  "coverage_note": "Standard-state formation enthalpies and entropies at 298.15 K and 1 bar for ~140 common inorganic compounds and reference-state elements. These are textbook thermochemical values entered BY HAND and spot-checked; they were not extracted from a machine-readable primary source and have not been verified entry by entry. Coverage is limited to well-known binary and simple ternary compounds: a reaction or hull involving any species outside this table is reported with a null energy and a stated reason rather than estimated. Enthalpies are used as a 0 K proxy for formation energy, which neglects the difference between \u0394H(298 K) and \u0394E(0 K) -- typically tens of meV per atom and not negligible at the thresholds this system applies.",
+  "dataset_id": "thermochemistry",
+  "dataset_version": "2026.03-r1",
+  "entries": [
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Ag",
+      "key": "Ag:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 42.6
+    },
+    {
+      "delta_hf_kj_per_mol": -127.0,
+      "formula": "AgCl",
+      "key": "Ag:1|Cl:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 96.3
+    },
+    {
+      "delta_hf_kj_per_mol": -32.6,
+      "formula": "Ag2S",
+      "key": "Ag:2|S:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "acanthite",
+      "standard_entropy_j_per_mol_k": 144.0
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Al",
+      "key": "Al:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 28.3
+    },
+    {
+      "delta_hf_kj_per_mol": -318.0,
+      "formula": "AlN",
+      "key": "Al:1|N:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 20.2
+    },
+    {
+      "delta_hf_kj_per_mol": -1733.8,
+      "formula": "AlPO4",
+      "key": "Al:1|O:4|P:1",
+      "n_atoms_per_formula_unit": 6.0,
+      "note": "berlinite",
+      "standard_entropy_j_per_mol_k": 90.8
+    },
+    {
+      "delta_hf_kj_per_mol": -2299.1,
+      "formula": "MgAl2O4",
+      "key": "Al:2|Mg:1|O:4",
+      "n_atoms_per_formula_unit": 7.0,
+      "note": "spinel",
+      "standard_entropy_j_per_mol_k": 80.6
+    },
+    {
+      "delta_hf_kj_per_mol": -1675.7,
+      "formula": "Al2O3",
+      "key": "Al:2|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "corundum",
+      "standard_entropy_j_per_mol_k": 50.9
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "B",
+      "key": "B:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 5.9
+    },
+    {
+      "delta_hf_kj_per_mol": -254.4,
+      "formula": "BN",
+      "key": "B:1|N:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 14.8
+    },
+    {
+      "delta_hf_kj_per_mol": -92.0,
+      "formula": "MgB2",
+      "key": "B:2|Mg:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "magnesium diboride",
+      "standard_entropy_j_per_mol_k": 36.0
+    },
+    {
+      "delta_hf_kj_per_mol": -1273.5,
+      "formula": "B2O3",
+      "key": "B:2|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 54.0
+    },
+    {
+      "delta_hf_kj_per_mol": -323.8,
+      "formula": "TiB2",
+      "key": "B:2|Ti:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 28.5
+    },
+    {
+      "delta_hf_kj_per_mol": -322.6,
+      "formula": "ZrB2",
+      "key": "B:2|Zr:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 35.9
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Ba",
+      "key": "Ba:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 62.5
+    },
+    {
+      "delta_hf_kj_per_mol": -1213.0,
+      "formula": "BaCO3",
+      "key": "Ba:1|C:1|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "witherite",
+      "standard_entropy_j_per_mol_k": 112.1
+    },
+    {
+      "delta_hf_kj_per_mol": -1207.1,
+      "formula": "BaF2",
+      "key": "Ba:1|F:2",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 96.4
+    },
+    {
+      "delta_hf_kj_per_mol": -553.5,
+      "formula": "BaO",
+      "key": "Ba:1|O:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 70.4
+    },
+    {
+      "delta_hf_kj_per_mol": -1659.8,
+      "formula": "BaTiO3",
+      "key": "Ba:1|O:3|Ti:1",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "barium titanate",
+      "standard_entropy_j_per_mol_k": 107.9
+    },
+    {
+      "delta_hf_kj_per_mol": -1473.2,
+      "formula": "BaSO4",
+      "key": "Ba:1|O:4|S:1",
+      "n_atoms_per_formula_unit": 6.0,
+      "note": "barite",
+      "standard_entropy_j_per_mol_k": 132.2
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Bi",
+      "key": "Bi:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 56.7
+    },
+    {
+      "delta_hf_kj_per_mol": -573.9,
+      "formula": "Bi2O3",
+      "key": "Bi:2|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 151.5
+    },
+    {
+      "delta_hf_kj_per_mol": -393.8,
+      "formula": "KBr",
+      "key": "Br:1|K:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 95.9
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "C",
+      "key": "C:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "graphite, reference state",
+      "standard_entropy_j_per_mol_k": 5.7
+    },
+    {
+      "delta_hf_kj_per_mol": -1207.6,
+      "formula": "CaCO3",
+      "key": "C:1|Ca:1|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "calcite",
+      "standard_entropy_j_per_mol_k": 91.7
+    },
+    {
+      "delta_hf_kj_per_mol": 25.1,
+      "formula": "Fe3C",
+      "key": "C:1|Fe:3",
+      "n_atoms_per_formula_unit": 4.0,
+      "note": "cementite; endothermic formation",
+      "standard_entropy_j_per_mol_k": 104.6
+    },
+    {
+      "delta_hf_kj_per_mol": -1151.0,
+      "formula": "K2CO3",
+      "key": "C:1|K:2|O:3",
+      "n_atoms_per_formula_unit": 6.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 155.5
+    },
+    {
+      "delta_hf_kj_per_mol": -1215.9,
+      "formula": "Li2CO3",
+      "key": "C:1|Li:2|O:3",
+      "n_atoms_per_formula_unit": 6.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 90.4
+    },
+    {
+      "delta_hf_kj_per_mol": -1095.8,
+      "formula": "MgCO3",
+      "key": "C:1|Mg:1|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "magnesite",
+      "standard_entropy_j_per_mol_k": 65.7
+    },
+    {
+      "delta_hf_kj_per_mol": -1130.7,
+      "formula": "Na2CO3",
+      "key": "C:1|Na:2|O:3",
+      "n_atoms_per_formula_unit": 6.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 135.0
+    },
+    {
+      "delta_hf_kj_per_mol": -110.53,
+      "formula": "CO",
+      "key": "C:1|O:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "gas",
+      "standard_entropy_j_per_mol_k": 197.7
+    },
+    {
+      "delta_hf_kj_per_mol": -393.51,
+      "formula": "CO2",
+      "key": "C:1|O:2",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "gas",
+      "standard_entropy_j_per_mol_k": 213.8
+    },
+    {
+      "delta_hf_kj_per_mol": -1220.1,
+      "formula": "SrCO3",
+      "key": "C:1|O:3|Sr:1",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "strontianite",
+      "standard_entropy_j_per_mol_k": 97.1
+    },
+    {
+      "delta_hf_kj_per_mol": -73.2,
+      "formula": "SiC",
+      "key": "C:1|Si:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "moissanite",
+      "standard_entropy_j_per_mol_k": 16.6
+    },
+    {
+      "delta_hf_kj_per_mol": -184.1,
+      "formula": "TiC",
+      "key": "C:1|Ti:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 24.2
+    },
+    {
+      "delta_hf_kj_per_mol": -38.0,
+      "formula": "WC",
+      "key": "C:1|W:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 35.5
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Ca",
+      "key": "Ca:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 41.6
+    },
+    {
+      "delta_hf_kj_per_mol": -1228.0,
+      "formula": "CaF2",
+      "key": "Ca:1|F:2",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "fluorite",
+      "standard_entropy_j_per_mol_k": 68.5
+    },
+    {
+      "delta_hf_kj_per_mol": -634.9,
+      "formula": "CaO",
+      "key": "Ca:1|O:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "lime",
+      "standard_entropy_j_per_mol_k": 38.1
+    },
+    {
+      "delta_hf_kj_per_mol": -1634.9,
+      "formula": "CaSiO3",
+      "key": "Ca:1|O:3|Si:1",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "wollastonite",
+      "standard_entropy_j_per_mol_k": 81.9
+    },
+    {
+      "delta_hf_kj_per_mol": -1660.6,
+      "formula": "CaTiO3",
+      "key": "Ca:1|O:3|Ti:1",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "perovskite",
+      "standard_entropy_j_per_mol_k": 93.6
+    },
+    {
+      "delta_hf_kj_per_mol": -1434.5,
+      "formula": "CaSO4",
+      "key": "Ca:1|O:4|S:1",
+      "n_atoms_per_formula_unit": 6.0,
+      "note": "anhydrite",
+      "standard_entropy_j_per_mol_k": 106.5
+    },
+    {
+      "delta_hf_kj_per_mol": -161.9,
+      "formula": "CdS",
+      "key": "Cd:1|S:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 64.9
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Ce",
+      "key": "Ce:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 72.0
+    },
+    {
+      "delta_hf_kj_per_mol": -1088.7,
+      "formula": "CeO2",
+      "key": "Ce:1|O:2",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "ceria",
+      "standard_entropy_j_per_mol_k": 62.3
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Cl",
+      "key": "Cl:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "reference state, gas",
+      "standard_entropy_j_per_mol_k": 223.1
+    },
+    {
+      "delta_hf_kj_per_mol": -436.5,
+      "formula": "KCl",
+      "key": "Cl:1|K:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "sylvite",
+      "standard_entropy_j_per_mol_k": 82.6
+    },
+    {
+      "delta_hf_kj_per_mol": -411.2,
+      "formula": "NaCl",
+      "key": "Cl:1|Na:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "halite",
+      "standard_entropy_j_per_mol_k": 72.1
+    },
+    {
+      "delta_hf_kj_per_mol": -220.1,
+      "formula": "CuCl2",
+      "key": "Cl:2|Cu:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 108.1
+    },
+    {
+      "delta_hf_kj_per_mol": -399.5,
+      "formula": "FeCl3",
+      "key": "Cl:3|Fe:1",
+      "n_atoms_per_formula_unit": 4.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 142.3
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Co",
+      "key": "Co:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 30.0
+    },
+    {
+      "delta_hf_kj_per_mol": -237.9,
+      "formula": "CoO",
+      "key": "Co:1|O:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 53.0
+    },
+    {
+      "delta_hf_kj_per_mol": -891.0,
+      "formula": "Co3O4",
+      "key": "Co:3|O:4",
+      "n_atoms_per_formula_unit": 7.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 102.5
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Cr",
+      "key": "Cr:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 23.8
+    },
+    {
+      "delta_hf_kj_per_mol": -1139.7,
+      "formula": "Cr2O3",
+      "key": "Cr:2|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "eskolaite",
+      "standard_entropy_j_per_mol_k": 81.2
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Cu",
+      "key": "Cu:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 33.2
+    },
+    {
+      "delta_hf_kj_per_mol": -157.3,
+      "formula": "CuO",
+      "key": "Cu:1|O:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "tenorite",
+      "standard_entropy_j_per_mol_k": 42.6
+    },
+    {
+      "delta_hf_kj_per_mol": -771.4,
+      "formula": "CuSO4",
+      "key": "Cu:1|O:4|S:1",
+      "n_atoms_per_formula_unit": 6.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 109.2
+    },
+    {
+      "delta_hf_kj_per_mol": -168.6,
+      "formula": "Cu2O",
+      "key": "Cu:2|O:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "cuprite",
+      "standard_entropy_j_per_mol_k": 93.1
+    },
+    {
+      "delta_hf_kj_per_mol": -616.0,
+      "formula": "LiF",
+      "key": "F:1|Li:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 35.7
+    },
+    {
+      "delta_hf_kj_per_mol": -576.6,
+      "formula": "NaF",
+      "key": "F:1|Na:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 51.1
+    },
+    {
+      "delta_hf_kj_per_mol": -1124.2,
+      "formula": "MgF2",
+      "key": "F:2|Mg:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 57.2
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Fe",
+      "key": "Fe:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 27.3
+    },
+    {
+      "delta_hf_kj_per_mol": -272.0,
+      "formula": "FeO",
+      "key": "Fe:1|O:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "wuestite",
+      "standard_entropy_j_per_mol_k": 60.8
+    },
+    {
+      "delta_hf_kj_per_mol": -178.2,
+      "formula": "FeS2",
+      "key": "Fe:1|S:2",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "pyrite",
+      "standard_entropy_j_per_mol_k": 52.9
+    },
+    {
+      "delta_hf_kj_per_mol": -824.2,
+      "formula": "Fe2O3",
+      "key": "Fe:2|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "hematite",
+      "standard_entropy_j_per_mol_k": 87.4
+    },
+    {
+      "delta_hf_kj_per_mol": -1479.9,
+      "formula": "Fe2SiO4",
+      "key": "Fe:2|O:4|Si:1",
+      "n_atoms_per_formula_unit": 7.0,
+      "note": "fayalite",
+      "standard_entropy_j_per_mol_k": 145.2
+    },
+    {
+      "delta_hf_kj_per_mol": -1118.4,
+      "formula": "Fe3O4",
+      "key": "Fe:3|O:4",
+      "n_atoms_per_formula_unit": 7.0,
+      "note": "magnetite",
+      "standard_entropy_j_per_mol_k": 146.1
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Ga",
+      "key": "Ga:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 40.9
+    },
+    {
+      "delta_hf_kj_per_mol": -156.8,
+      "formula": "GaN",
+      "key": "Ga:1|N:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 29.7
+    },
+    {
+      "delta_hf_kj_per_mol": -1089.1,
+      "formula": "Ga2O3",
+      "key": "Ga:2|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 85.0
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Ge",
+      "key": "Ge:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 31.1
+    },
+    {
+      "delta_hf_kj_per_mol": -580.0,
+      "formula": "GeO2",
+      "key": "Ge:1|O:2",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 39.7
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "H",
+      "key": "H:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "reference state, gas",
+      "standard_entropy_j_per_mol_k": 130.7
+    },
+    {
+      "delta_hf_kj_per_mol": -285.83,
+      "formula": "H2O",
+      "key": "H:2|O:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "liquid water at 298 K",
+      "standard_entropy_j_per_mol_k": 69.9
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Hf",
+      "key": "Hf:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 43.6
+    },
+    {
+      "delta_hf_kj_per_mol": -1144.7,
+      "formula": "HfO2",
+      "key": "Hf:1|O:2",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 59.3
+    },
+    {
+      "delta_hf_kj_per_mol": -287.8,
+      "formula": "NaI",
+      "key": "I:1|Na:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 98.5
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "In",
+      "key": "In:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 57.8
+    },
+    {
+      "delta_hf_kj_per_mol": -925.8,
+      "formula": "In2O3",
+      "key": "In:2|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 104.2
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "K",
+      "key": "K:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 64.7
+    },
+    {
+      "delta_hf_kj_per_mol": -494.6,
+      "formula": "KNO3",
+      "key": "K:1|N:1|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "niter",
+      "standard_entropy_j_per_mol_k": 133.1
+    },
+    {
+      "delta_hf_kj_per_mol": -363.2,
+      "formula": "K2O",
+      "key": "K:2|O:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 94.1
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "La",
+      "key": "La:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 56.9
+    },
+    {
+      "delta_hf_kj_per_mol": -1793.7,
+      "formula": "La2O3",
+      "key": "La:2|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 127.3
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Li",
+      "key": "Li:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 29.1
+    },
+    {
+      "delta_hf_kj_per_mol": -597.9,
+      "formula": "Li2O",
+      "key": "Li:2|O:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 37.6
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Mg",
+      "key": "Mg:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 32.7
+    },
+    {
+      "delta_hf_kj_per_mol": -601.6,
+      "formula": "MgO",
+      "key": "Mg:1|O:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "periclase",
+      "standard_entropy_j_per_mol_k": 27.0
+    },
+    {
+      "delta_hf_kj_per_mol": -1548.5,
+      "formula": "MgSiO3",
+      "key": "Mg:1|O:3|Si:1",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "enstatite",
+      "standard_entropy_j_per_mol_k": 67.8
+    },
+    {
+      "delta_hf_kj_per_mol": -1284.9,
+      "formula": "MgSO4",
+      "key": "Mg:1|O:4|S:1",
+      "n_atoms_per_formula_unit": 6.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 91.6
+    },
+    {
+      "delta_hf_kj_per_mol": -2174.0,
+      "formula": "Mg2SiO4",
+      "key": "Mg:2|O:4|Si:1",
+      "n_atoms_per_formula_unit": 7.0,
+      "note": "forsterite",
+      "standard_entropy_j_per_mol_k": 95.1
+    },
+    {
+      "delta_hf_kj_per_mol": -77.8,
+      "formula": "Mg2Si",
+      "key": "Mg:2|Si:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 75.9
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Mn",
+      "key": "Mn:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 32.0
+    },
+    {
+      "delta_hf_kj_per_mol": -385.2,
+      "formula": "MnO",
+      "key": "Mn:1|O:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 59.7
+    },
+    {
+      "delta_hf_kj_per_mol": -520.0,
+      "formula": "MnO2",
+      "key": "Mn:1|O:2",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "pyrolusite",
+      "standard_entropy_j_per_mol_k": 53.1
+    },
+    {
+      "delta_hf_kj_per_mol": -959.0,
+      "formula": "Mn2O3",
+      "key": "Mn:2|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 110.5
+    },
+    {
+      "delta_hf_kj_per_mol": -1387.8,
+      "formula": "Mn3O4",
+      "key": "Mn:3|O:4",
+      "n_atoms_per_formula_unit": 7.0,
+      "note": "hausmannite",
+      "standard_entropy_j_per_mol_k": 155.6
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Mo",
+      "key": "Mo:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 28.7
+    },
+    {
+      "delta_hf_kj_per_mol": -745.1,
+      "formula": "MoO3",
+      "key": "Mo:1|O:3",
+      "n_atoms_per_formula_unit": 4.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 77.7
+    },
+    {
+      "delta_hf_kj_per_mol": -235.1,
+      "formula": "MoS2",
+      "key": "Mo:1|S:2",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "molybdenite",
+      "standard_entropy_j_per_mol_k": 62.6
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "N",
+      "key": "N:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "reference state, gas",
+      "standard_entropy_j_per_mol_k": 191.6
+    },
+    {
+      "delta_hf_kj_per_mol": -467.9,
+      "formula": "NaNO3",
+      "key": "N:1|Na:1|O:3",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "nitratine",
+      "standard_entropy_j_per_mol_k": 116.5
+    },
+    {
+      "delta_hf_kj_per_mol": -337.7,
+      "formula": "TiN",
+      "key": "N:1|Ti:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "osbornite",
+      "standard_entropy_j_per_mol_k": 30.3
+    },
+    {
+      "delta_hf_kj_per_mol": -217.2,
+      "formula": "VN",
+      "key": "N:1|V:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 37.3
+    },
+    {
+      "delta_hf_kj_per_mol": -365.3,
+      "formula": "ZrN",
+      "key": "N:1|Zr:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 38.9
+    },
+    {
+      "delta_hf_kj_per_mol": -744.0,
+      "formula": "Si3N4",
+      "key": "N:4|Si:3",
+      "n_atoms_per_formula_unit": 7.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 113.0
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Na",
+      "key": "Na:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 51.3
+    },
+    {
+      "delta_hf_kj_per_mol": -414.2,
+      "formula": "Na2O",
+      "key": "Na:2|O:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 75.1
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Nb",
+      "key": "Nb:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 36.4
+    },
+    {
+      "delta_hf_kj_per_mol": -1899.5,
+      "formula": "Nb2O5",
+      "key": "Nb:2|O:5",
+      "n_atoms_per_formula_unit": 7.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 137.2
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Ni",
+      "key": "Ni:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 29.9
+    },
+    {
+      "delta_hf_kj_per_mol": -239.7,
+      "formula": "NiO",
+      "key": "Ni:1|O:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "bunsenite",
+      "standard_entropy_j_per_mol_k": 38.0
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "O",
+      "key": "O:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "reference state, gas",
+      "standard_entropy_j_per_mol_k": 205.2
+    },
+    {
+      "delta_hf_kj_per_mol": -219.0,
+      "formula": "PbO",
+      "key": "O:1|Pb:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "litharge",
+      "standard_entropy_j_per_mol_k": 66.5
+    },
+    {
+      "delta_hf_kj_per_mol": -592.0,
+      "formula": "SrO",
+      "key": "O:1|Sr:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 54.4
+    },
+    {
+      "delta_hf_kj_per_mol": -350.5,
+      "formula": "ZnO",
+      "key": "O:1|Zn:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "zincite",
+      "standard_entropy_j_per_mol_k": 43.7
+    },
+    {
+      "delta_hf_kj_per_mol": -910.7,
+      "formula": "SiO2",
+      "key": "O:2|Si:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "quartz",
+      "standard_entropy_j_per_mol_k": 41.5
+    },
+    {
+      "delta_hf_kj_per_mol": -580.7,
+      "formula": "SnO2",
+      "key": "O:2|Sn:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "cassiterite",
+      "standard_entropy_j_per_mol_k": 52.3
+    },
+    {
+      "delta_hf_kj_per_mol": -944.0,
+      "formula": "TiO2",
+      "key": "O:2|Ti:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "rutile",
+      "standard_entropy_j_per_mol_k": 50.6
+    },
+    {
+      "delta_hf_kj_per_mol": -1100.6,
+      "formula": "ZrO2",
+      "key": "O:2|Zr:1",
+      "n_atoms_per_formula_unit": 3.0,
+      "note": "baddeleyite",
+      "standard_entropy_j_per_mol_k": 50.4
+    },
+    {
+      "delta_hf_kj_per_mol": -708.8,
+      "formula": "Sb2O3",
+      "key": "O:3|Sb:2",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 123.0
+    },
+    {
+      "delta_hf_kj_per_mol": -1908.8,
+      "formula": "Sc2O3",
+      "key": "O:3|Sc:2",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "scandia",
+      "standard_entropy_j_per_mol_k": 77.0
+    },
+    {
+      "delta_hf_kj_per_mol": -1672.4,
+      "formula": "SrTiO3",
+      "key": "O:3|Sr:1|Ti:1",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "strontium titanate",
+      "standard_entropy_j_per_mol_k": 108.8
+    },
+    {
+      "delta_hf_kj_per_mol": -842.9,
+      "formula": "WO3",
+      "key": "O:3|W:1",
+      "n_atoms_per_formula_unit": 4.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 75.9
+    },
+    {
+      "delta_hf_kj_per_mol": -1905.3,
+      "formula": "Y2O3",
+      "key": "O:3|Y:2",
+      "n_atoms_per_formula_unit": 5.0,
+      "note": "yttria",
+      "standard_entropy_j_per_mol_k": 99.1
+    },
+    {
+      "delta_hf_kj_per_mol": -2033.4,
+      "formula": "ZrSiO4",
+      "key": "O:4|Si:1|Zr:1",
+      "n_atoms_per_formula_unit": 6.0,
+      "note": "zircon",
+      "standard_entropy_j_per_mol_k": 84.0
+    },
+    {
+      "delta_hf_kj_per_mol": -1504.9,
+      "formula": "P2O5",
+      "key": "O:5|P:2",
+      "n_atoms_per_formula_unit": 7.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 114.5
+    },
+    {
+      "delta_hf_kj_per_mol": -2046.0,
+      "formula": "Ta2O5",
+      "key": "O:5|Ta:2",
+      "n_atoms_per_formula_unit": 7.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 143.1
+    },
+    {
+      "delta_hf_kj_per_mol": -1550.6,
+      "formula": "V2O5",
+      "key": "O:5|V:2",
+      "n_atoms_per_formula_unit": 7.0,
+      "note": null,
+      "standard_entropy_j_per_mol_k": 131.0
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "P",
+      "key": "P:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "white, reference state",
+      "standard_entropy_j_per_mol_k": 41.1
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Pb",
+      "key": "Pb:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 64.8
+    },
+    {
+      "delta_hf_kj_per_mol": -100.4,
+      "formula": "PbS",
+      "key": "Pb:1|S:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "galena",
+      "standard_entropy_j_per_mol_k": 91.2
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "S",
+      "key": "S:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "rhombic, reference state",
+      "standard_entropy_j_per_mol_k": 32.1
+    },
+    {
+      "delta_hf_kj_per_mol": -206.0,
+      "formula": "ZnS",
+      "key": "S:1|Zn:1",
+      "n_atoms_per_formula_unit": 2.0,
+      "note": "sphalerite",
+      "standard_entropy_j_per_mol_k": 57.7
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Sc",
+      "key": "Sc:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 34.6
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Si",
+      "key": "Si:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 18.8
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Sn",
+      "key": "Sn:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 51.2
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Sr",
+      "key": "Sr:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 55.0
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Ta",
+      "key": "Ta:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 41.5
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Ti",
+      "key": "Ti:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 30.7
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "V",
+      "key": "V:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 28.9
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "W",
+      "key": "W:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 32.6
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Y",
+      "key": "Y:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 44.4
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Zn",
+      "key": "Zn:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 41.6
+    },
+    {
+      "delta_hf_kj_per_mol": 0.0,
+      "formula": "Zr",
+      "key": "Zr:1",
+      "n_atoms_per_formula_unit": 1.0,
+      "note": "reference state",
+      "standard_entropy_j_per_mol_k": 39.0
+    }
+  ],
+  "license": "CC0-1.0 (hand-entered standard values, no third-party data file)",
+  "n_entries": 146,
+  "pressure_pa": 100000.0,
+  "temperature_k": 298.15
+}

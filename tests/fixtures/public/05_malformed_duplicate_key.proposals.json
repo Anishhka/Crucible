@@ -1,0 +1,19 @@
+{
+  "schema_version": "1-0-0",
+  "batch_id": "public-malformed-dupkey-005",
+  "generator": { "model_id": "matgen-inorganic-preview", "prompt_id": "hypothesis.inorganic@2.4.0" },
+  "objective": "Envelope-level defect: the same key appears twice in one object, with different values.",
+  "proposals": [
+    {
+      "proposal_id": "D-0001",
+      "composition": { "formula": "BaTiO3" },
+      "synthesis_hint": {
+        "route": "solid_state",
+        "temperature": 1200,
+        "temperature_unit": "C",
+        "temperature": 40000,
+        "atmosphere": "air"
+      }
+    }
+  ]
+}

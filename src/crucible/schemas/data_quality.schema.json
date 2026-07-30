@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crucible.spec/schema/data_quality.schema.json",
+  "title": "Crucible Data Quality Report",
+  "description": "Exactly one data_quality.json per output directory. This artifact answers a single question: what did Crucible refuse to believe, and why. A pipeline that silently coerces bad input into plausible output is worse than one that crashes, because it launders a defect into a result. Every input record that was altered, quarantined, or partially trusted MUST be accounted for here.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "totals", "rules", "quarantined"],
+  "properties": {
+    "schema_version": { "const": "1-0-0" },
+    "run_id": { "type": "string", "maxLength": 128 },
+    "totals": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["records_seen", "records_admitted", "records_quarantined", "records_modified"],
+      "properties": {
+        "records_seen": { "type": "integer", "minimum": 0 },
+        "records_admitted": { "type": "integer", "minimum": 0 },
+        "records_quarantined": { "type": "integer", "minimum": 0 },
+        "records_modified": {
+          "description": "Records admitted only after a normalisation that changed their meaning-bearing content (e.g. a formula rewritten). Must be non-zero if any such change happened.",
+          "type": "integer", "minimum": 0
+        },
+        "bytes_read": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "rules": {
+      "description": "One entry per data-quality rule Crucible enforces, INCLUDING rules that fired zero times -- at least one entry each for: input byte budget, nesting depth, node count, string length, array length, duplicate object keys, non-finite numeric literals, timezone-naive timestamps. A rule that only appears when it fires cannot be used to prove a clean input was actually checked.",
+      "type": "array",
+      "minItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["rule_id", "description", "action", "n_triggered"],
+        "properties": {
+          "rule_id": { "type": "string", "maxLength": 64, "pattern": "^[a-z][a-z0-9_.]{0,63}$" },
+          "description": { "type": "string", "maxLength": 500 },
+          "action": {
+            "description": "What happens when the rule fires. 'coerce' is permitted only when the coercion is lossless and recorded.",
+            "enum": ["quarantine", "reject_field", "coerce", "flag"]
+          },
+          "n_triggered": { "type": "integer", "minimum": 0 },
+          "violation_code": { "type": ["string", "null"], "maxLength": 96 },
+          "examples": {
+            "description": "Up to five illustrative proposal_ids. Sorted, so the artifact stays byte-stable.",
+            "type": "array", "maxItems": 5,
+            "items": { "type": "string", "maxLength": 64 }
+          }
+        }
+      }
+    },
+    "quarantined": {
+      "description": "Every record that did not enter the pipeline, with the reason. The count MUST equal totals.records_quarantined.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["locator", "reason", "violation_code"],
+        "properties": {
+          "locator": {
+            "description": "How to find the offending record in the input: a proposal_id when one could be read, otherwise a JSON Pointer such as /proposals/17.",
+            "type": "string", "maxLength": 256
+          },
+          "reason": { "type": "string", "maxLength": 1000 },
+          "violation_code": { "type": "string", "maxLength": 96 },
+          "raw_excerpt": {
+            "description": "A short, escaped excerpt of the offending content, truncated. MUST NOT contain unescaped control characters and MUST NOT be long enough to re-import the defect.",
+            "type": ["string", "null"], "maxLength": 512
+          }
+        }
+      }
+    },
+    "unit_normalizations": {
+      "description": "Every unit conversion applied to a claimed property, with the factor used. Unit drift between proposals is expected; silent unit drift inside Crucible is not.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["proposal_id", "property", "from_unit", "to_unit", "factor"],
+        "properties": {
+          "proposal_id": { "type": "string", "maxLength": 64 },
+          "property": { "type": "string", "maxLength": 64 },
+          "from_unit": { "type": "string", "maxLength": 32 },
+          "to_unit": { "type": "string", "maxLength": 32 },
+          "factor": { "type": "number" }
+        }
+      }
+    },
+    "sentinel_detections": {
+      "description": "Values that are numerically valid but are almost certainly placeholders rather than measurements.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["proposal_id", "json_pointer", "value"],
+        "properties": {
+          "proposal_id": { "type": "string", "maxLength": 64 },
+          "json_pointer": { "type": "string", "maxLength": 256 },
+          "value": { "type": ["number", "string"] },
+          "rationale": { "type": "string", "maxLength": 500 }
+        }
+      }
+    }
+  }
+}

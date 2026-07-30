@@ -1,0 +1,198 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+    tags: ["v*"]
+  pull_request:
+
+env:
+  # Match the graded environment (CONTRACT.md §6). These reduce the surface
+  # area; they are not the mechanism, and the determinism test deliberately
+  # runs once without them.
+  PYTHONHASHSEED: "0"
+  TZ: UTC
+  LC_ALL: C
+  SOURCE_DATE_EPOCH: "1767225600"
+  OMP_NUM_THREADS: "1"
+  OPENBLAS_NUM_THREADS: "1"
+  MKL_NUM_THREADS: "1"
+  MPLBACKEND: Agg
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install
+        run: pip install -e . pytest
+
+      # The fixtures live in the specification packet, not this repository.
+      # Vendored under tests/fixtures for CI so the suite is self-contained;
+      # when they are absent the fixture-driven tests skip rather than fail.
+      - name: Locate fixtures
+        id: fixtures
+        run: |
+          if [ -d tests/fixtures/public ]; then
+            echo "path=$PWD/tests/fixtures/public" >> "$GITHUB_OUTPUT"
+          else
+            echo "path=" >> "$GITHUB_OUTPUT"
+            echo "::notice::spec fixtures not vendored; fixture-driven tests will skip"
+          fi
+
+      - name: Run test suite
+        env:
+          CRUCIBLE_FIXTURES: ${{ steps.fixtures.outputs.path }}
+        run: pytest tests/ -q
+
+      - name: Rebuild the corpora and confirm they are byte-identical
+        run: |
+          python -m crucible.reference_data.generate
+          git diff --exit-code -- src/crucible/reference_data/ \
+            || { echo "::error::committed corpora differ from what the builder produces"; exit 1; }
+
+  image:
+    runs-on: ubuntu-latest
+    needs: test
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build image
+        run: docker build -t crucible:${{ github.sha }} .
+
+      - name: Image is within the size ceiling
+        run: |
+          BYTES=$(docker image inspect --format '{{.Size}}' crucible:${{ github.sha }})
+          echo "uncompressed rootfs: $((BYTES / 1024 / 1024)) MiB"
+          test "$BYTES" -le $((2 * 1024 * 1024 * 1024)) \
+            || { echo "::error::image exceeds the 2 GiB ceiling"; exit 1; }
+
+      - name: Container hardening
+        run: |
+          USER_SPEC=$(docker inspect --format '{{.Config.User}}' crucible:${{ github.sha }})
+          echo "USER=$USER_SPEC"
+          case "$USER_SPEC" in ""|root|0|0:*) echo "::error::final USER must be numeric non-zero"; exit 1 ;; esac
+
+          # No network or build tooling in the final image. One `command -v` per
+          # tool: dash resolves only the first operand, so the single-call form
+          # silently tests for curl and nothing else.
+          FOUND=$(docker run --rm --entrypoint sh crucible:${{ github.sha }} -c \
+            'for t in curl wget nc netcat gcc cc g++; do command -v "$t" 2>/dev/null; done | tr "\n" " "')
+          test -z "$FOUND" || { echo "::error::final image carries: $FOUND"; exit 1; }
+
+          # The tools the graded container checks inspect the image through.
+          docker run --rm --entrypoint sh crucible:${{ github.sha }} -c \
+            'for t in sh id find du awk; do command -v "$t" >/dev/null || exit 1; done'
+
+          # A named environment, not the installation base.
+          docker run --rm --entrypoint sh crucible:${{ github.sha }} -c \
+            'python -c "import sys,os; assert not os.path.isdir(os.path.join(sys.prefix,\"envs\")), sys.prefix"'
+
+          # No accelerator runtime anywhere.
+          ACC=$(docker run --rm --entrypoint sh crucible:${{ github.sha }} -c \
+            'find / -xdev \( -name "libcudart*" -o -name "libcudnn*" -o -name "libnccl*" -o -name "libnvidia*" \) 2>/dev/null | head -3')
+          test -z "$ACC" || { echo "::error::accelerator runtime present: $ACC"; exit 1; }
+
+      - name: Fixture exit codes under the graded invocation
+        run: |
+          if [ ! -d tests/fixtures/public ]; then
+            echo "::notice::fixtures not vendored; skipping"; exit 0
+          fi
+          mkdir -p out
+          fail=0
+          check() {
+            rm -rf out/*; set +e
+            docker run --rm --user 10001:10001 --read-only \
+              --tmpfs /tmp:rw,noexec,nosuid,nodev,size=512m \
+              --cap-drop ALL --security-opt no-new-privileges=true \
+              --network none --cpus 2 --memory 4g --memory-swap 4g --pids-limit 512 \
+              -v "$PWD/tests/fixtures/public:/data/in:ro" -v "$PWD/out:/data/out:rw" \
+              crucible:${{ github.sha }} run --input "/data/in/$1" --out /data/out \
+              --offline --seed 12345 --now 2026-01-01T00:00:00Z
+            got=$?; set -e
+            echo "$1 -> $got (want one of: $2)"
+            case " $2 " in *" $got "*) ;; *) echo "::error::$1 returned $got"; fail=1 ;; esac
+          }
+          check 01_baseline.proposals.json "0 4"
+          check 02_messy.proposals.json "4"
+          check 03_adversarial.proposals.json "4"
+          check 04_malformed_nonfinite.proposals.json "3"
+          check 05_malformed_duplicate_key.proposals.json "3"
+          check 06_malformed_depth.proposals.json "3"
+          check 07_unsupported_version.proposals.json "3"
+          exit $fail
+
+      - name: Byte-identical reruns under the graded invocation
+        run: |
+          if [ ! -d tests/fixtures/public ]; then exit 0; fi
+          run_once() {
+            rm -rf "$1"; mkdir -p "$1"
+            docker run --rm --user 10001:10001 --read-only \
+              --tmpfs /tmp:rw,noexec,nosuid,nodev,size=512m \
+              --cap-drop ALL --security-opt no-new-privileges=true \
+              --network none --cpus 2 --memory 4g --memory-swap 4g \
+              -v "$PWD/tests/fixtures/public:/data/in:ro" -v "$PWD/$1:/data/out:rw" \
+              crucible:${{ github.sha }} run \
+              --input /data/in/02_messy.proposals.json --out /data/out \
+              --offline --seed 12345 --now 2026-01-01T00:00:00Z --max-workers "$2" || true
+          }
+          run_once outA 1
+          run_once outB 8
+          for f in verdicts.jsonl violations.jsonl data_quality.json; do
+            cmp "outA/$f" "outB/$f" || { echo "::error::$f differs across --max-workers"; exit 1; }
+          done
+          echo "graded artifacts are byte-identical across --max-workers 1 and 8"
+
+      - name: Lineage and cross-run aggregation
+        run: |
+          if [ ! -d tests/fixtures/public ]; then exit 0; fi
+          mkdir -p r1 r2 agg
+          for pair in "01_baseline r1 2026-01-01" "02_messy r2 2026-02-01"; do
+            set -- $pair
+            docker run --rm --user 10001:10001 --read-only \
+              --tmpfs /tmp:rw,noexec,nosuid,nodev,size=512m \
+              --cap-drop ALL --security-opt no-new-privileges=true --network none \
+              -v "$PWD/tests/fixtures/public:/data/in:ro" -v "$PWD/$2:/data/out:rw" \
+              crucible:${{ github.sha }} run --input "/data/in/$1.proposals.json" \
+              --out /data/out --offline --seed 1 --now "${3}T00:00:00Z" || true
+          done
+
+          # A freshly produced output must reconstruct cleanly back to the code,
+          # config, inputs and corpora that made it.
+          docker run --rm --user 10001:10001 --read-only \
+            --tmpfs /tmp:rw,noexec,nosuid,nodev,size=512m \
+            --cap-drop ALL --security-opt no-new-privileges=true --network none \
+            -v "$PWD/tests/fixtures/public:/data/in:ro" -v "$PWD/r1:/data/out:rw" \
+            crucible:${{ github.sha }} lineage --out /data/out \
+            --input /data/in/01_baseline.proposals.json \
+            || { echo "::error::lineage reported divergence on a fresh run"; exit 1; }
+
+          docker run --rm --user 10001:10001 --read-only \
+            --tmpfs /tmp:rw,noexec,nosuid,nodev,size=512m \
+            --cap-drop ALL --security-opt no-new-privileges=true --network none \
+            -v "$PWD/r1:/data/r1:ro" -v "$PWD/r2:/data/r2:ro" -v "$PWD/agg:/data/out:rw" \
+            crucible:${{ github.sha }} aggregate --runs /data/r1 /data/r2 --out /data/out \
+            || { echo "::error::aggregate failed"; exit 1; }
+          test -s agg/aggregate.json && test -s agg/aggregate.html
+          echo "lineage and aggregation verified in-container"
+
+      - name: Publish to GHCR
+        if: github.ref == 'refs/heads/main' || startsWith(github.ref, 'refs/tags/v')
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u "${{ github.actor }}" --password-stdin
+          REPO=$(echo "${{ github.repository }}" | tr '[:upper:]' '[:lower:]')
+          docker tag crucible:${{ github.sha }} "ghcr.io/$REPO:${{ github.sha }}"
+          docker push "ghcr.io/$REPO:${{ github.sha }}"
+          if [ "${{ startsWith(github.ref, 'refs/tags/v') }}" = "true" ]; then
+            TAG="${GITHUB_REF#refs/tags/}"
+            docker tag crucible:${{ github.sha }} "ghcr.io/$REPO:$TAG"
+            docker push "ghcr.io/$REPO:$TAG"
+          fi

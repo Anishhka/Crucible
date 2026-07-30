@@ -1,0 +1,596 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crucible.spec/schema/verdict.schema.json",
+  "title": "Crucible Verdict Record",
+  "description": "Exactly one JSON object per line of verdicts.jsonl. This record is the canonical output of Crucible; every other artifact (violations, feedback projections, report, figures) MUST be derivable from the set of verdict records plus the run manifest, and MUST NOT contain a graded fact that does not appear here.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "record_schema_version",
+    "record_id",
+    "run_id",
+    "proposal_id",
+    "candidate_key",
+    "verdict",
+    "normalized",
+    "checks",
+    "evidence",
+    "assumptions"
+  ],
+  "properties": {
+    "record_schema_version": {
+      "description": "SchemaVer of THIS record format. Fixed at 1-0-0 for this release.",
+      "const": "1-0-0"
+    },
+    "record_id": {
+      "description": "Stable identifier for this verdict. MUST be deterministic given (run_id, proposal_id).",
+      "type": "string", "minLength": 1, "maxLength": 128
+    },
+    "run_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "proposal_id": { "type": "string", "minLength": 1, "maxLength": 64 },
+    "candidate_key": {
+      "description": "Content hash of the proposal, computed over RFC 8785 (JCS) canonicalised JSON of the proposal object, lowercase hex sha256, prefixed 'sha256:'. Two byte-different-but-semantically-identical proposals MUST produce the same candidate_key. This is how the same material is recognised across batches.",
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "verdict": { "$ref": "#/$defs/verdict" },
+    "normalized": { "$ref": "#/$defs/normalized" },
+    "checks": {
+      "description": "Ordered list of every check Crucible attempted for this proposal, including checks that were skipped or could not be run. A check that was not attempted MUST appear with outcome 'not_applicable' or 'unavailable' rather than being omitted. At minimum, checks[] MUST contain one entry for each of the phases 'parse', 'composition', 'structure', 'novelty' and 'claims', using outcome 'not_applicable' or 'unavailable' where the phase did not run.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/check" }
+    },
+    "violations": {
+      "description": "Findings raised for this proposal. The same findings appear, denormalised, in violations.jsonl.",
+      "type": "array",
+      "items": { "$ref": "#/$defs/violation_ref" }
+    },
+    "evidence": { "$ref": "#/$defs/evidence_block" },
+    "novelty": { "$ref": "#/$defs/novelty_block" },
+    "feasibility": { "$ref": "#/$defs/feasibility_block" },
+    "route": { "$ref": "#/$defs/route_block" },
+    "claim_audit": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/claim_audit_entry" }
+    },
+    "assumptions": { "$ref": "#/$defs/assumptions_block" },
+    "repairs": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/repair" }
+    },
+    "calibration": { "$ref": "#/$defs/calibration_block" },
+    "artifacts": {
+      "description": "Paths, relative to the output directory, of figures or documents generated for this proposal. Paths MUST be relative, MUST NOT contain '..', and MUST resolve inside the output directory.",
+      "type": "array",
+      "maxItems": 64,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "path", "media_type"],
+        "properties": {
+          "kind": { "enum": ["phase_diagram", "chempot_diagram", "reaction_network", "structure", "evidence_table", "other"] },
+          "path": { "type": "string", "maxLength": 512, "pattern": "^[A-Za-z0-9._/-]+$" },
+          "media_type": { "enum": ["text/html", "image/svg+xml", "image/png", "application/json", "text/vnd.graphviz"] },
+          "data_companion": {
+            "description": "Relative path to the machine-readable JSON companion for this figure. Required for every figure whose content is graded.",
+            "type": "string", "maxLength": 512, "pattern": "^[A-Za-z0-9._/-]+$"
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "verdict": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "reward", "reward_fn_id", "reward_components", "gates_failed"],
+      "properties": {
+        "status": {
+          "description": "THREE-valued, deliberately. 'unverifiable' means Crucible could not reach a defensible conclusion (a provider was unavailable, a required input was absent). It is NOT a synonym for 'rejected': a database timeout is not evidence that a material is bad, and unverifiable records must be excludable from any downstream training projection.",
+          "enum": ["accepted", "rejected", "unverifiable"]
+        },
+        "reward": {
+          "description": "Scalar in [0,1]. reward = (product over gate components of value) x (sum over non-gate components of value*weight) / (sum over non-gate components of weight); non-gate weights need not sum to 1, they are normalised by their own total; if there are no non-gate components that factor is 1; if any gate component is 0, reward MUST be 0. Which components exist, which of them gate, and what the weights are are decisions this specification leaves open; the arithmetic that combines them is not.",
+          "type": "number", "minimum": 0, "maximum": 1
+        },
+        "reward_fn_id": {
+          "description": "name@semver of the reward function. Changing weights REQUIRES bumping this, because historical rewards are otherwise incomparable.",
+          "type": "string", "maxLength": 128, "pattern": "^[a-z0-9_.-]+@[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "reward_components": {
+          "description": "Raw per-component values stored alongside their weights so that a re-weighting never requires re-verification.",
+          "type": "object",
+          "minProperties": 1,
+          "maxProperties": 32,
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["value", "weight", "gate"],
+            "properties": {
+              "value": { "type": "number", "minimum": 0, "maximum": 1 },
+              "weight": { "type": "number", "minimum": 0, "maximum": 1 },
+              "gate": { "type": "boolean" },
+              "rationale": { "type": "string", "maxLength": 500 }
+            }
+          },
+          "propertyNames": { "type": "string", "pattern": "^[a-z][a-z0-9_]{0,63}$" }
+        },
+        "gates_failed": {
+          "description": "The keys of every entry in reward_components whose 'gate' is true and whose 'value' is 0. These are reward-component keys, not violation codes. MUST be non-empty whenever any gate component is 0, and empty otherwise.",
+          "type": "array",
+          "items": { "type": "string", "maxLength": 64 }
+        },
+        "verifiable": {
+          "description": "False when at least one check required to reach a terminal status could not be run.",
+          "type": "boolean"
+        },
+        "summary": { "type": "string", "maxLength": 1000 }
+      }
+    },
+    "normalized": {
+      "description": "The canonical interpretation Crucible arrived at. Downstream comparison uses these fields, never the raw generator strings.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["formula_raw", "formula_normalized", "in_scope"],
+      "allOf": [
+        {
+          "if": { "properties": { "in_scope": { "const": false } }, "required": ["in_scope"] },
+          "then": {
+            "required": ["scope_reason"],
+            "properties": { "scope_reason": { "type": "string", "minLength": 1 } }
+          }
+        }
+      ],
+      "properties": {
+        "formula_raw": {
+          "description": "The generator's formula byte-for-byte as received.",
+          "type": "string", "maxLength": 200
+        },
+        "formula_normalized": {
+          "description": "ASCII-only canonical form after normalisation, or null when the formula could not be normalised safely. MUST NOT be a lossy coercion of a formula containing non-ASCII element symbols: such a formula is rejected, not repaired.",
+          "type": ["string", "null"], "maxLength": 200
+        },
+        "reduced_formula": { "type": ["string", "null"], "maxLength": 200 },
+        "elements": {
+          "type": ["array", "null"],
+          "items": { "type": "string", "maxLength": 4 }
+        },
+        "n_elements": { "type": ["integer", "null"], "minimum": 0 },
+        "chemsys": {
+          "description": "Hyphen-joined, alphabetically sorted element symbols, e.g. 'Fe-O'.",
+          "type": ["string", "null"], "maxLength": 128
+        },
+        "normalization_steps": {
+          "description": "Ordered, auditable record of what was done to the raw string. An empty array means the raw string was already canonical.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["step", "before", "after"],
+            "properties": {
+              "step": { "type": "string", "maxLength": 64 },
+              "before": { "type": "string", "maxLength": 200 },
+              "after": { "type": "string", "maxLength": 200 }
+            }
+          }
+        },
+        "in_scope": {
+          "description": "Whether the proposal is an inorganic crystalline solid, which is the only class Crucible claims competence over. Out-of-scope proposals are reported as such and are NOT scored as if they were bad materials.",
+          "type": "boolean"
+        },
+        "scope_reason": { "type": ["string", "null"], "maxLength": 500 }
+      }
+    },
+    "check": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["check_id", "phase", "outcome"],
+      "properties": {
+        "check_id": { "type": "string", "maxLength": 64, "pattern": "^[a-z][a-z0-9_.]{0,63}$" },
+        "phase": { "enum": ["parse", "schema", "composition", "structure", "novelty", "feasibility", "claims", "route", "meta"] },
+        "outcome": {
+          "description": "'unavailable' MUST be used when the check could not be executed (offline cache miss, provider error). Silently downgrading an unavailable check to 'pass' or to a negative finding is the single most serious correctness failure in this system.",
+          "enum": ["pass", "fail", "warn", "not_applicable", "unavailable"]
+        },
+        "detail": { "type": "string", "maxLength": 1000 },
+        "measured": {
+          "type": "object",
+          "maxProperties": 32,
+          "additionalProperties": true
+        },
+        "tool": { "type": "string", "maxLength": 128 },
+        "duration_class": { "enum": ["fast", "slow"] }
+      }
+    },
+    "violation_ref": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "level", "json_pointer"],
+      "properties": {
+        "code": {
+          "description": "A code from the core taxonomy, or a candidate-defined extension code in the X.* namespace.",
+          "type": "string",
+          "pattern": "^[A-Z][A-Z0-9]*(\\.[A-Z][A-Z0-9_]*){1,3}$",
+          "maxLength": 96
+        },
+        "level": { "enum": ["none", "note", "warning", "error"] },
+        "json_pointer": {
+          "description": "RFC 6901 pointer into the offending proposal object, identifying WHICH field was wrong. Aggregating (json_pointer x code) is the most actionable table this system produces.",
+          "type": "string", "maxLength": 256
+        },
+        "observed": { "type": ["string", "number", "boolean", "null"], "maxLength": 2000 },
+        "expected": { "type": ["string", "number", "boolean", "null"], "maxLength": 2000 },
+        "message": { "type": "string", "maxLength": 1000 },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "fingerprint": {
+          "description": "Stable across runs for the same finding on the same input. Used to answer 'is this a new problem or the same one'.",
+          "type": "string", "pattern": "^sha256:[0-9a-f]{64}$"
+        },
+        "unverifiable": { "type": "boolean" }
+      }
+    },
+    "evidence_block": {
+      "description": "One entry per provider consulted, INCLUDING providers that were configured but could not be reached. Omitting an unreachable provider is a silent-failure bug.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["queries"],
+      "properties": {
+        "queries": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["provider", "mode", "status", "query"],
+            "allOf": [
+              {
+                "if": { "properties": { "status": { "const": "hit" } }, "required": ["status"] },
+                "then": {
+                  "required": ["matches"],
+                  "properties": { "matches": { "minItems": 1 } }
+                }
+              }
+            ],
+            "properties": {
+              "provider": { "type": "string", "maxLength": 64, "pattern": "^[a-z][a-z0-9_]{0,63}$" },
+              "mode": {
+                "description": "How the answer was obtained. 'snapshot' = a local, complete corpus was searched, so a miss is real evidence of absence within that corpus. 'replay' = a recorded interaction was replayed, so a miss means only that this query was never recorded. 'live' = a network call was made. Conflating snapshot-miss with replay-miss is a correctness failure.",
+                "enum": ["live", "snapshot", "replay"]
+              },
+              "status": { "enum": ["hit", "miss", "unavailable"] },
+              "query": {
+                "description": "The exact query string sent to the provider, AFTER per-provider normalisation. Different providers require different formula spellings; recording the actual string sent is what makes a null result auditable.",
+                "type": "string", "maxLength": 512
+              },
+              "normalization_note": { "type": "string", "maxLength": 256 },
+              "n_results": { "type": ["integer", "null"], "minimum": 0 },
+              "reference_data_id": {
+                "description": "Which entry in run_manifest.reference_data this answer came from. REQUIRED for snapshot and replay modes, because a novelty claim is meaningless without the corpus version it is relative to.",
+                "type": ["string", "null"], "maxLength": 128
+              },
+              "error": { "type": ["string", "null"], "maxLength": 500 },
+              "matches": {
+                "type": "array",
+                "maxItems": 50,
+                "items": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": ["identifier", "match_kind", "provenance"],
+                  "properties": {
+                    "identifier": { "type": "string", "maxLength": 128 },
+                    "match_kind": { "enum": ["exact_formula", "reduced_formula", "structure", "chemsys", "text"] },
+                    "url": { "type": ["string", "null"], "maxLength": 512 },
+                    "title": { "type": ["string", "null"], "maxLength": 512 },
+                    "doi": { "type": ["string", "null"], "maxLength": 128 },
+                    "year": { "type": ["integer", "null"] },
+                    "provenance": {
+                      "description": "The evidence class this match belongs to. Where the source publishes a provenance flag, record it; where it does not, record 'unknown' rather than omitting the field, because an omission and an ignorance look the same in the artifact and only one of them is honest.",
+                      "enum": ["experimental", "computed", "literature", "unknown"]
+                    },
+                    "properties": { "type": "object", "additionalProperties": true, "maxProperties": 32 }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "novelty_block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tier", "confidence", "rationale"],
+      "properties": {
+        "tier": {
+          "description": "Ordered from strongest prior art to weakest. 'unknown' is mandatory when the evidence needed to distinguish tiers was unavailable; it MUST NOT be collapsed into 'no_evidence'.",
+          "enum": ["experimentally_reported", "computed_only", "literature_mention", "no_evidence", "unknown"]
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+        "rationale": { "type": "string", "maxLength": 2000 },
+        "supporting_provider_ids": {
+          "type": "array",
+          "items": { "type": "string", "maxLength": 64 }
+        },
+        "conflicts": {
+          "description": "Where providers disagreed, and how the disagreement was resolved. An empty array asserts that no provider disagreed.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["providers", "description", "resolution"],
+            "properties": {
+              "providers": { "type": "array", "items": { "type": "string", "maxLength": 64 } },
+              "description": { "type": "string", "maxLength": 1000 },
+              "resolution": { "type": "string", "maxLength": 1000 }
+            }
+          }
+        }
+      }
+    },
+    "feasibility_block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["verdict", "rationale"],
+      "properties": {
+        "verdict": { "enum": ["plausible", "marginal", "implausible", "unknown"] },
+        "rationale": { "type": "string", "maxLength": 4000 },
+        "energy_above_hull_ev_per_atom": { "type": ["number", "null"] },
+        "formation_energy_ev_per_atom": { "type": ["number", "null"] },
+        "decomposition_energy_ev_per_atom": { "type": ["number", "null"] },
+        "decomposition_products": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["formula", "fraction"],
+            "properties": {
+              "formula": { "type": "string", "maxLength": 100 },
+              "fraction": { "type": "number" }
+            }
+          }
+        },
+        "threshold_used_ev_per_atom": {
+          "description": "The stability cutoff applied. There is no consensus value; whatever is chosen MUST be stated here and justified in the run configuration.",
+          "type": ["number", "null"]
+        },
+        "threshold_basis": { "type": ["string", "null"], "maxLength": 500 },
+        "charge_balanced": { "type": ["boolean", "null"] },
+        "oxidation_states": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["element", "state"],
+            "properties": {
+              "element": { "type": "string", "maxLength": 4 },
+              "state": { "type": "number" }
+            }
+          }
+        },
+        "atmosphere_stability": {
+          "type": ["array", "null"],
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["atmosphere", "stable"],
+            "properties": {
+              "atmosphere": { "type": "string", "maxLength": 32 },
+              "stable": { "type": ["boolean", "null"] },
+              "driving_force_ev_per_atom": { "type": ["number", "null"] },
+              "products": { "type": "array", "items": { "type": "string", "maxLength": 100 } }
+            }
+          }
+        }
+      }
+    },
+    "route_block": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["routes"],
+      "properties": {
+        "routes": {
+          "type": "array",
+          "maxItems": 20,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["route_id", "rank", "reaction", "conditions", "assumptions"],
+            "properties": {
+              "route_id": { "type": "string", "maxLength": 64 },
+              "rank": { "type": "integer", "minimum": 1 },
+              "reaction": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": ["reactants", "products", "balanced"],
+                "properties": {
+                  "reactants": {
+                    "type": "array", "minItems": 1,
+                    "items": {
+                      "type": "object", "additionalProperties": false,
+                      "required": ["formula", "coefficient"],
+                      "properties": {
+                        "formula": { "type": "string", "maxLength": 100 },
+                        "coefficient": { "type": "number" }
+                      }
+                    }
+                  },
+                  "products": {
+                    "type": "array", "minItems": 1,
+                    "items": {
+                      "type": "object", "additionalProperties": false,
+                      "required": ["formula", "coefficient"],
+                      "properties": {
+                        "formula": { "type": "string", "maxLength": 100 },
+                        "coefficient": { "type": "number" }
+                      }
+                    }
+                  },
+                  "balanced": { "type": "boolean" },
+                  "normalization": {
+                    "description": "Which convention fixes the arbitrary overall scale of the balanced equation. Without this, two correct implementations disagree by a constant factor.",
+                    "type": "string", "maxLength": 128
+                  }
+                }
+              },
+              "driving_force_ev_per_atom": { "type": ["number", "null"] },
+              "conditions": {
+                "type": "object",
+                "additionalProperties": false,
+                "properties": {
+                  "temperature_k": { "type": ["number", "null"] },
+                  "pressure_pa": { "type": ["number", "null"] },
+                  "atmosphere": { "type": ["string", "null"], "maxLength": 32 },
+                  "duration_hours": { "type": ["number", "null"] },
+                  "notes": { "type": ["string", "null"], "maxLength": 1000 }
+                }
+              },
+              "assumptions": {
+                "type": "array", "minItems": 1,
+                "items": { "type": "string", "maxLength": 500 }
+              },
+              "competing_products": {
+                "type": "array",
+                "items": { "type": "string", "maxLength": 100 }
+              },
+              "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+            }
+          }
+        },
+        "hint_assessment": {
+          "description": "Crucible's judgement of the generator's own synthesis_hint, when one was supplied.",
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "required": ["consistent", "rationale"],
+          "properties": {
+            "consistent": { "type": ["boolean", "null"] },
+            "rationale": { "type": "string", "maxLength": 2000 },
+            "issues": { "type": "array", "items": { "type": "string", "maxLength": 500 } }
+          }
+        }
+      }
+    },
+    "claim_audit_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "claimed_value", "claimed_unit", "assessment"],
+      "properties": {
+        "name": { "type": "string", "maxLength": 64 },
+        "claimed_value": { "type": ["number", "null"] },
+        "claimed_unit": { "type": ["string", "null"], "maxLength": 32 },
+        "normalized_value": { "type": ["number", "null"] },
+        "normalized_unit": { "type": ["string", "null"], "maxLength": 32 },
+        "reference_value": { "type": ["number", "null"] },
+        "reference_source": { "type": ["string", "null"], "maxLength": 256 },
+        "assessment": {
+          "enum": ["supported", "unsupported", "contradicted", "implausible", "unit_error", "unverifiable"]
+        },
+        "detail": { "type": "string", "maxLength": 1000 }
+      }
+    },
+    "assumptions_block": {
+      "description": "The assumption stack under which every number in this record was computed. A feasibility number without its frame is not a result; it is a rumour.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["thermodynamic_frame", "temperature_k", "pressure_pa", "atmosphere", "notes"],
+      "properties": {
+        "thermodynamic_frame": {
+          "enum": ["closed_0k", "closed_finite_t", "grand_potential", "not_evaluated"]
+        },
+        "temperature_k": { "type": ["number", "null"], "minimum": 0 },
+        "pressure_pa": { "type": ["number", "null"], "minimum": 0 },
+        "atmosphere": { "type": ["string", "null"], "maxLength": 64 },
+        "chemical_potentials": {
+          "type": ["object", "null"],
+          "maxProperties": 16,
+          "additionalProperties": { "type": "number" }
+        },
+        "energy_model": { "type": ["string", "null"], "maxLength": 256 },
+        "symmetry_tolerance": { "type": ["number", "null"] },
+        "structure_matcher_tolerances": {
+          "type": ["object", "null"],
+          "additionalProperties": { "type": "number" },
+          "maxProperties": 8
+        },
+        "defect_free": { "type": "boolean" },
+        "stoichiometric": { "type": "boolean" },
+        "bulk": { "type": "boolean" },
+        "notes": {
+          "description": "At least one entry MUST name the frame, the energy model or reference corpus, and the sense in which the number is conditional. A bare label such as 'closed 0K' restates the enumeration next to it and does not satisfy this, which is why a minimum length is enforced here.",
+          "type": "array",
+          "minItems": 1,
+          "contains": { "type": "string", "minLength": 25 },
+          "items": { "type": "string", "maxLength": 1000 }
+        }
+      }
+    },
+    "repair": {
+      "description": "A minimal, machine-applicable correction. Only repairs that were re-verified may be promoted into a preference pair downstream.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["repair_id", "targets", "patch", "rationale", "reverified"],
+      "properties": {
+        "repair_id": { "type": "string", "maxLength": 64 },
+        "targets": {
+          "description": "Violation codes this repair is intended to resolve.",
+          "type": "array", "minItems": 1,
+          "items": { "type": "string", "maxLength": 96 }
+        },
+        "kind": { "enum": ["minimal_edit", "substitution", "removal", "annotation"] },
+        "patch": {
+          "description": "RFC 6902 JSON Patch applied to the original proposal object.",
+          "type": "array", "minItems": 1,
+          "items": {
+            "type": "object",
+            "required": ["op", "path"],
+            "properties": {
+              "op": { "enum": ["add", "remove", "replace", "move", "copy", "test"] },
+              "path": { "type": "string", "maxLength": 256 },
+              "from": { "type": "string", "maxLength": 256 },
+              "value": true
+            }
+          }
+        },
+        "rationale": { "type": "string", "maxLength": 2000 },
+        "reverified": {
+          "description": "True only if the patched proposal was actually run back through the same checks. Asserting true without doing so is a fabrication.",
+          "type": "boolean"
+        },
+        "post_repair_status": { "enum": ["accepted", "rejected", "unverifiable", "not_evaluated"] },
+        "post_repair_reward": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "edit_distance": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "fields_changed": { "type": "integer", "minimum": 0 },
+            "chars_changed": { "type": "integer", "minimum": 0 }
+          }
+        },
+        "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+      }
+    },
+    "calibration_block": {
+      "description": "Pairs the generator's self-reported confidence against the outcome, per field. This is the raw material for measuring whether the upstream model knows what it does not know.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["pairs"],
+      "properties": {
+        "pairs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["json_pointer", "self_confidence", "outcome"],
+            "properties": {
+              "json_pointer": { "type": "string", "maxLength": 256 },
+              "self_confidence": { "type": "number", "minimum": 0, "maximum": 1 },
+              "outcome": { "enum": ["correct", "incorrect", "unverifiable"] },
+              "verifier_confidence": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+              "verifier_determinism": { "enum": ["deterministic", "stochastic", "heuristic"] }
+            }
+          }
+        },
+        "overall_self_confidence": { "type": ["number", "null"], "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}

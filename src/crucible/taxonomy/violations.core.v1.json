@@ -1,0 +1,290 @@
+{
+  "taxonomy_id": "crucible.violations.core",
+  "taxonomy_version": "1.0.0",
+  "description": "The core violation vocabulary. Crucible MUST emit these codes with these meanings. Codes are never renamed and never reused: a code that becomes obsolete is marked deprecated and kept forever, because historical rows referencing it must stay interpretable. Implementations MAY add their own codes in the reserved X.* namespace; those are aggregated separately and never collide with the core.",
+  "conventions": {
+    "code_shape": "DOMAIN.SUBSYSTEM.CONDITION, uppercase, dot-separated, 2 to 4 segments.",
+    "severity_is_separate": "The code says WHAT happened. The level says HOW BAD. The confidence says HOW SURE. These are three independent axes and severity is never encoded in the code string, so that severity can be re-tuned without invalidating historical data.",
+    "gate_semantics": "A gate violation means no downstream conclusion about this proposal is trustworthy. Gate components multiply into the reward, so a gate failure forces reward to exactly 0. Non-gate findings contribute a weighted sum.",
+    "unverifiable_semantics": "unverifiable=true marks an inability to check, not a detected defect. These rows must be excluded from every error-rate statistic and from every training projection.",
+    "extension_namespace": "X.",
+    "versioning": "Adding a code is a MINOR bump. Splitting one code into children is a MINOR bump with the parent retained. Changing what a code MEANS is a MAJOR bump."
+  },
+  "levels": ["none", "note", "warning", "error"],
+  "phases": ["parse", "schema", "composition", "structure", "novelty", "feasibility", "claims", "route", "meta"],
+  "rules": [
+    {
+      "id": "FMT.JSON.UNPARSEABLE",
+      "phase": "parse", "level": "error", "gate": true, "since": "1.0.0",
+      "summary": "The input could not be parsed as JSON at all.",
+      "guidance": "Applies to the whole file. A run that raises this cannot produce verdicts and exits 3."
+    },
+    {
+      "id": "FMT.JSON.SIZE_EXCEEDED",
+      "phase": "parse", "level": "error", "gate": true, "since": "1.0.0",
+      "summary": "The input exceeded the configured byte budget.",
+      "guidance": "The budget must be enforced BEFORE the parser is handed the stream, not after. Detecting this by running out of memory does not count."
+    },
+    {
+      "id": "FMT.JSON.DEPTH_EXCEEDED",
+      "phase": "parse", "level": "error", "gate": true, "since": "1.0.0",
+      "summary": "Nesting depth exceeded the configured bound.",
+      "guidance": "Must be enforced by an explicit bound. Catching whatever exception the parser happens to raise is not enforcement, because different parsers on different runtimes fail differently or not at all."
+    },
+    {
+      "id": "FMT.JSON.DUPLICATE_KEY",
+      "phase": "parse", "level": "error", "gate": true, "since": "1.0.0",
+      "summary": "The same key appeared twice in one JSON object.",
+      "guidance": "Default JSON decoding silently keeps the last occurrence. That behaviour lets a payload show one value to a validator and a different value to a consumer, so duplicates are rejected rather than resolved."
+    },
+    {
+      "id": "FMT.JSON.NON_FINITE_NUMBER",
+      "phase": "parse", "level": "error", "gate": true, "since": "1.0.0",
+      "summary": "A non-finite numeric literal (NaN, Infinity, -Infinity) was present.",
+      "guidance": "These are not valid JSON, but common decoders accept them by default. They must be rejected explicitly."
+    },
+    {
+      "id": "FMT.ENCODING.NON_ASCII_SYMBOL",
+      "phase": "parse", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "A chemical formula contained a character outside the permitted ASCII set after normalisation.",
+      "guidance": "Several element symbols have visually identical counterparts in other scripts. Such a formula must be rejected, never silently mapped to the lookalike, because a wrong guess produces a confident wrong answer."
+    },
+    {
+      "id": "FMT.ENCODING.INVISIBLE_CHARACTER",
+      "phase": "parse", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "A zero-width or other format-category character was present in a meaning-bearing string.",
+      "guidance": "These characters make two strings compare unequal while rendering identically, which silently splits deduplication and defeats allowlists."
+    },
+    {
+      "id": "FMT.SCHEMA.VERSION_UNSUPPORTED",
+      "phase": "schema", "level": "error", "gate": true, "since": "1.0.0",
+      "summary": "The declared schema_version has a MODEL component this build does not implement.",
+      "guidance": "Applies at the envelope level and prevents any verdict from being produced."
+    },
+    {
+      "id": "FMT.SCHEMA.REQUIRED_FIELD_MISSING",
+      "phase": "schema", "level": "error", "gate": true, "since": "1.0.0",
+      "summary": "A required field was absent."
+    },
+    {
+      "id": "FMT.SCHEMA.UNKNOWN_FIELD",
+      "phase": "schema", "level": "error", "gate": true, "since": "1.0.0",
+      "summary": "An undeclared field was present.",
+      "guidance": "The input contract is closed. An unrecognised field means the generator and the verifier disagree about the contract, which is exactly the condition that must be surfaced rather than tolerated."
+    },
+    {
+      "id": "FMT.SCHEMA.TYPE_MISMATCH",
+      "phase": "schema", "level": "error", "gate": true, "since": "1.0.0",
+      "summary": "A field had the wrong JSON type or violated its declared constraints.",
+      "guidance": "Despite the name, this code covers constraint violations as well as type errors: a present, correctly typed string that fails its declared pattern, enum, format, minimum, maximum, minLength or maxLength is reported under this code. Reach for an X.* extension code only for a condition the core taxonomy does not already name."
+    },
+    {
+      "id": "FMT.ID.DUPLICATE_PROPOSAL_ID",
+      "phase": "schema", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "Two proposals in one batch declared the same proposal_id.",
+      "guidance": "A duplicate identifier is a defect in the generator, not an instruction to merge or to overwrite. Both records must be accounted for."
+    },
+    {
+      "id": "FMT.TIME.NAIVE_TIMESTAMP",
+      "phase": "schema", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "A timestamp was supplied without an explicit UTC offset."
+    },
+    {
+      "id": "CHEM.FORMULA.UNPARSEABLE",
+      "phase": "composition", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "The formula string could not be interpreted as a chemical formula."
+    },
+    {
+      "id": "CHEM.FORMULA.UNKNOWN_ELEMENT",
+      "phase": "composition", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "The formula referenced a symbol that is not a known chemical element."
+    },
+    {
+      "id": "CHEM.FORMULA.INCONSISTENT_WITH_ELEMENTS",
+      "phase": "composition", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "The declared elements map disagreed with the parsed formula string."
+    },
+    {
+      "id": "CHEM.FORMULA.NOT_REDUCED",
+      "phase": "composition", "level": "note", "gate": false, "since": "1.0.0",
+      "summary": "The formula was not in reduced form.",
+      "guidance": "Informational, not a defect. Recorded because matching against sources that store reduced formulas depends on it."
+    },
+    {
+      "id": "CHEM.SCOPE.NOT_INORGANIC_CRYSTALLINE",
+      "phase": "composition", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "The proposal is not an inorganic crystalline solid and is outside the domain this tool claims competence over.",
+      "guidance": "Out of scope is a statement about the tool's limits, not a judgement about the material. Such a proposal must be reported as out of scope and must not be scored as though it were an incorrect inorganic material."
+    },
+    {
+      "id": "CHEM.CHARGE.NOT_NEUTRAL",
+      "phase": "composition", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "No assignment of common oxidation states balances the composition to neutral.",
+      "guidance": "A warning, not an error. Charge-neutrality screens are known to reject a meaningful fraction of materials that demonstrably exist, particularly alloys, mixed-valence compounds and f-block chemistry."
+    },
+    {
+      "id": "CHEM.CHARGE.NON_INTEGER_OXIDATION",
+      "phase": "composition", "level": "warning", "gate": false, "since": "1.0.0",
+      "parent": "CHEM.CHARGE.NOT_NEUTRAL",
+      "summary": "Neutrality was achievable only with non-integer oxidation states."
+    },
+    {
+      "id": "CHEM.ELECTRONEG.IMBALANCED",
+      "phase": "composition", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "The proposed cation/anion assignment is inconsistent with electronegativity ordering."
+    },
+    {
+      "id": "STRUCT.GEOM.ATOM_OVERLAP",
+      "phase": "structure", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "Two sites are closer than the configured minimum interatomic distance, accounting for periodicity.",
+      "guidance": "The minimum distance is a configurable threshold, not a constant of nature. Whatever value is used must appear in the run configuration and in the record's assumptions."
+    },
+    {
+      "id": "STRUCT.GEOM.IMPLAUSIBLE_LATTICE",
+      "phase": "structure", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "Lattice parameters are non-physical or outside a plausible range."
+    },
+    {
+      "id": "STRUCT.GEOM.IMPLAUSIBLE_DENSITY",
+      "phase": "structure", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "The implied mass or atomic density is outside a plausible range for a crystalline solid."
+    },
+    {
+      "id": "STRUCT.SYMMETRY.SPACEGROUP_INCONSISTENT",
+      "phase": "structure", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "The space group asserted by the generator does not match the one determined from the coordinates.",
+      "guidance": "Symmetry determination depends on a tolerance. The tolerance used must be recorded, because a disagreement at one tolerance can be an agreement at another."
+    },
+    {
+      "id": "STRUCT.SITES.OCCUPANCY_INCONSISTENT",
+      "phase": "structure", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "Site occupancies do not reproduce the declared composition."
+    },
+    {
+      "id": "NOVEL.DUPLICATE.EXACT_MATCH",
+      "phase": "novelty", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "An experimentally reported entry with the same composition was found.",
+      "guidance": "Raised only when a source that carries experimental provenance reports a match. A computed-only match is a different, weaker finding."
+    },
+    {
+      "id": "NOVEL.DUPLICATE.COMPOSITION_MATCH",
+      "phase": "novelty", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "A computed entry with the same reduced composition was found in at least one source."
+    },
+    {
+      "id": "NOVEL.DUPLICATE.STRUCTURE_MATCH",
+      "phase": "novelty", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "A structurally equivalent entry was found under the configured matching tolerances."
+    },
+    {
+      "id": "NOVEL.PRIOR_ART.LITERATURE_MENTION",
+      "phase": "novelty", "level": "note", "gate": false, "since": "1.0.0",
+      "summary": "The composition appears in the scholarly literature without a corresponding database entry."
+    },
+    {
+      "id": "NOVEL.EVIDENCE.SOURCES_DISAGREE",
+      "phase": "novelty", "level": "note", "gate": false, "since": "1.0.0",
+      "summary": "Sources returned contradictory answers about prior art.",
+      "guidance": "Disagreement is expected and is itself information. It must be recorded and resolved by a stated rule, not averaged away."
+    },
+    {
+      "id": "FEAS.THERMO.EHULL_ABOVE_THRESHOLD",
+      "phase": "feasibility", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "The energy above the convex hull exceeds the configured stability threshold.",
+      "guidance": "There is no consensus threshold. Blanket cutoffs are known to exclude large fractions of compounds that have in fact been synthesised. Whichever value is used must be stated and justified."
+    },
+    {
+      "id": "FEAS.THERMO.DECOMPOSES",
+      "phase": "feasibility", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "The composition is predicted to decompose into a set of competing phases."
+    },
+    {
+      "id": "FEAS.ATMOSPHERE.UNSTABLE",
+      "phase": "feasibility", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "The material is predicted to react with the stated processing atmosphere.",
+      "guidance": "Requires an open-system treatment. A closed, zero-temperature analysis cannot support this finding and must not be used to raise it."
+    },
+    {
+      "id": "FEAS.FRAME.INAPPROPRIATE",
+      "phase": "feasibility", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "The generator's stated synthesis conditions are outside the regime in which the applied thermodynamic frame is meaningful.",
+      "guidance": "For example, reporting a closed zero-temperature result as though it settled stability in air at 1200 K."
+    },
+    {
+      "id": "FEAS.SYNTH.NO_VIABLE_ROUTE",
+      "phase": "route", "level": "note", "gate": false, "since": "1.0.0",
+      "summary": "No balanced route with a favourable driving force was found from the available precursors."
+    },
+    {
+      "id": "FEAS.SYNTH.LOW_DRIVING_FORCE",
+      "phase": "route", "level": "note", "gate": false, "since": "1.0.0",
+      "summary": "The best available route has a small driving force.",
+      "guidance": "Small driving force is associated with slow kinetics and is a leading real-world cause of failed syntheses, independent of thermodynamic stability."
+    },
+    {
+      "id": "FEAS.SYNTH.HINT_INCOHERENT",
+      "phase": "route", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "The synthesis hint supplied by the generator is internally inconsistent or inconsistent with the material."
+    },
+    {
+      "id": "FEAS.SYNTH.PRECURSOR_UNAVAILABLE",
+      "phase": "route", "level": "note", "gate": false, "since": "1.0.0",
+      "summary": "A named precursor could not be identified as a real, obtainable compound."
+    },
+    {
+      "id": "CLAIM.UNSUPPORTED.PROPERTY_ASSERTION",
+      "phase": "claims", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "A claimed property could not be corroborated by any consulted source."
+    },
+    {
+      "id": "CLAIM.CONTRADICTED.PROPERTY_ASSERTION",
+      "phase": "claims", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "A claimed property is contradicted by a consulted source."
+    },
+    {
+      "id": "CLAIM.UNITS.INCONSISTENT",
+      "phase": "claims", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "A claimed value is inconsistent with its declared unit, or units are inconsistent across the batch for the same property.",
+      "guidance": "Unit drift is one of the most common and most damaging defects in generated scientific data, precisely because the numbers remain plausible."
+    },
+    {
+      "id": "CLAIM.VALUE.PHYSICALLY_IMPOSSIBLE",
+      "phase": "claims", "level": "error", "gate": false, "since": "1.0.0",
+      "summary": "A value violates a physical constraint independent of any measurement."
+    },
+    {
+      "id": "CLAIM.SENTINEL.SUSPECTED",
+      "phase": "claims", "level": "warning", "gate": false, "since": "1.0.0",
+      "summary": "A value is numerically valid but matches a common placeholder convention.",
+      "guidance": "Placeholders that are not NaN pass every type check and every range check that was not written with them in mind."
+    },
+    {
+      "id": "CLAIM.CONFIDENCE.MISCALIBRATED",
+      "phase": "claims", "level": "note", "gate": false, "since": "1.0.0",
+      "summary": "The generator expressed high confidence in a field that was found to be wrong."
+    },
+    {
+      "id": "VERIFY.UNAVAILABLE.PROVIDER_ERROR",
+      "phase": "meta", "level": "none", "gate": false, "unverifiable": true, "since": "1.0.0",
+      "summary": "A configured evidence provider could not be reached or returned an error.",
+      "guidance": "Never a statement about the material. A run in which this fires cannot claim a clean bill of health for the affected checks."
+    },
+    {
+      "id": "VERIFY.UNAVAILABLE.OFFLINE_CACHE_MISS",
+      "phase": "meta", "level": "none", "gate": false, "unverifiable": true, "since": "1.0.0",
+      "summary": "An offline run needed an interaction that was not present in the local record.",
+      "guidance": "A replay miss means the question was never asked, not that the answer is no. Reporting it as an absence of prior art is the most consequential error this system can make."
+    },
+    {
+      "id": "VERIFY.DEGRADED.PROVIDER_SKIPPED",
+      "phase": "meta", "level": "note", "gate": false, "since": "1.0.0",
+      "summary": "A provider was deliberately not consulted, for example because no credential was configured.",
+      "guidance": "Distinct from a provider error: this is a planned degradation, and the run should say so rather than pretending the provider does not exist."
+    },
+    {
+      "id": "VERIFY.BUDGET.EXHAUSTED",
+      "phase": "meta", "level": "note", "gate": false, "unverifiable": true, "since": "1.0.0",
+      "summary": "A time or request budget was reached before all checks completed."
+    }
+  ]
+}

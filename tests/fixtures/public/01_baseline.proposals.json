@@ -1,0 +1,221 @@
+{
+  "schema_version": "1-0-0",
+  "batch_id": "public-baseline-001",
+  "created_at": "2026-03-02T09:15:00Z",
+  "generator": {
+    "model_id": "matgen-inorganic-preview",
+    "prompt_id": "hypothesis.inorganic@2.4.0",
+    "prompt_sha256": "3b1f2c9d0a7e6b54c8d31f0a29e7b6c5d4a3928170f6e5d4c3b2a1908070605f",
+    "temperature": 0.7,
+    "top_p": 0.95,
+    "seed": 20260302
+  },
+  "objective": "Propose wide-band-gap oxide and boride candidates for high-temperature electrode and photocatalytic applications, including at least two well-characterised reference materials so that downstream verification can be calibrated.",
+  "proposals": [
+    {
+      "proposal_id": "P-0001",
+      "composition": {
+        "formula": "TiO2",
+        "elements": { "Ti": 1, "O": 2 },
+        "formula_units_per_cell": 2,
+        "charge": 0
+      },
+      "structure": {
+        "lattice": {
+          "a": 4.5937, "b": 4.5937, "c": 2.9587,
+          "alpha": 90.0, "beta": 90.0, "gamma": 90.0,
+          "length_unit": "angstrom", "angle_unit": "degree"
+        },
+        "sites": [
+          { "element": "Ti", "frac_coords": [0.0, 0.0, 0.0], "occupancy": 1, "oxidation_state": 4, "label": "Ti1" },
+          { "element": "Ti", "frac_coords": [0.5, 0.5, 0.5], "occupancy": 1, "oxidation_state": 4, "label": "Ti2" },
+          { "element": "O", "frac_coords": [0.3053, 0.3053, 0.0], "occupancy": 1, "oxidation_state": -2, "label": "O1" },
+          { "element": "O", "frac_coords": [0.6947, 0.6947, 0.0], "occupancy": 1, "oxidation_state": -2, "label": "O2" },
+          { "element": "O", "frac_coords": [0.8053, 0.1947, 0.5], "occupancy": 1, "oxidation_state": -2, "label": "O3" },
+          { "element": "O", "frac_coords": [0.1947, 0.8053, 0.5], "occupancy": 1, "oxidation_state": -2, "label": "O4" }
+        ],
+        "space_group": { "symbol": "P4_2/mnm", "number": 136 },
+        "source": "prototype_substitution"
+      },
+      "claimed_properties": [
+        { "name": "band_gap", "value": 3.0, "unit": "eV", "basis": "literature", "confidence": 0.92 },
+        { "name": "density", "value": 4.23, "unit": "g/cm3", "basis": "literature", "confidence": 0.88 }
+      ],
+      "synthesis_hint": {
+        "route": "solid_state",
+        "precursors": ["TiO2 (anatase)"],
+        "temperature": 900,
+        "temperature_unit": "C",
+        "atmosphere": "air",
+        "duration_hours": 6,
+        "notes": "Anatase-to-rutile conversion; included as a positive control."
+      },
+      "intended_application": "Photocatalysis reference material.",
+      "rationale": "Rutile titania is the canonical wide-band-gap oxide photocatalyst and is included so that a verifier which fails to recognise it can be identified immediately.",
+      "generator_confidence": {
+        "overall": 0.95,
+        "per_field": { "/composition/formula": 0.99, "/claimed_properties/0/value": 0.9 }
+      },
+      "references": [{ "kind": "free_text", "value": "Standard rutile reference structure" }]
+    },
+    {
+      "proposal_id": "P-0002",
+      "composition": {
+        "formula": "Fe2O3",
+        "elements": { "Fe": 2, "O": 3 },
+        "charge": 0
+      },
+      "claimed_properties": [
+        { "name": "band_gap", "value": 2.1, "unit": "eV", "basis": "literature", "confidence": 0.8 },
+        { "name": "magnetic_ordering_temperature", "value": 950, "unit": "K", "basis": "literature", "confidence": 0.7 }
+      ],
+      "synthesis_hint": {
+        "route": "solid_state",
+        "precursors": ["Fe(NO3)3.9H2O"],
+        "temperature": 700,
+        "temperature_unit": "C",
+        "atmosphere": "air",
+        "duration_hours": 4
+      },
+      "intended_application": "Photoanode for solar water splitting.",
+      "rationale": "Hematite is abundant, stable in oxidising conditions, and has a band gap in a useful range. Supplied without a structure to exercise the not-applicable path for structure checks.",
+      "generator_confidence": {
+        "overall": 0.9,
+        "per_field": { "/composition/formula": 0.97 }
+      }
+    },
+    {
+      "proposal_id": "P-0003",
+      "composition": {
+        "formula": "LiFePO4",
+        "elements": { "Li": 1, "Fe": 1, "P": 1, "O": 4 },
+        "charge": 0
+      },
+      "claimed_properties": [
+        { "name": "average_voltage", "value": 3.45, "unit": "V", "basis": "literature", "confidence": 0.9 },
+        { "name": "theoretical_capacity", "value": 170, "unit": "mAh/g", "basis": "predicted", "confidence": 0.85 }
+      ],
+      "synthesis_hint": {
+        "route": "solid_state",
+        "precursors": ["Li2CO3", "FeC2O4.2H2O", "NH4H2PO4"],
+        "temperature": 700,
+        "temperature_unit": "C",
+        "atmosphere": "Ar",
+        "duration_hours": 10,
+        "notes": "Inert atmosphere is required to keep iron in the divalent state."
+      },
+      "intended_application": "Cathode material.",
+      "rationale": "Olivine phosphate cathode with a well-characterised synthesis route; included to exercise reaction balancing against carbonate and oxalate precursors that release gaseous products.",
+      "generator_confidence": { "overall": 0.93 }
+    },
+    {
+      "proposal_id": "P-0004",
+      "composition": {
+        "formula": "Ba2ScNbO6",
+        "elements": { "Ba": 2, "Sc": 1, "Nb": 1, "O": 6 },
+        "charge": 0
+      },
+      "structure": {
+        "lattice": {
+          "a": 8.18, "b": 8.18, "c": 8.18,
+          "alpha": 90.0, "beta": 90.0, "gamma": 90.0
+        },
+        "sites": [
+          { "element": "Ba", "frac_coords": [0.25, 0.25, 0.25], "occupancy": 1 },
+          { "element": "Sc", "frac_coords": [0.0, 0.0, 0.0], "occupancy": 1 },
+          { "element": "Nb", "frac_coords": [0.5, 0.5, 0.5], "occupancy": 1 },
+          { "element": "O", "frac_coords": [0.26, 0.0, 0.0], "occupancy": 1 },
+          { "element": "O", "frac_coords": [0.0, 0.26, 0.0], "occupancy": 1 },
+          { "element": "O", "frac_coords": [0.0, 0.0, 0.26], "occupancy": 1 }
+        ],
+        "space_group": { "symbol": "Fm-3m", "number": 225 },
+        "source": "generated"
+      },
+      "claimed_properties": [
+        { "name": "band_gap", "value": 3.6, "unit": "eV", "basis": "predicted", "uncertainty": 0.5, "confidence": 0.45 },
+        { "name": "dielectric_constant", "value": 38, "unit": "1", "basis": "analogy", "confidence": 0.3 }
+      ],
+      "synthesis_hint": {
+        "route": "solid_state",
+        "precursors": ["BaCO3", "Sc2O3", "Nb2O5"],
+        "temperature": 1400,
+        "temperature_unit": "C",
+        "atmosphere": "air",
+        "duration_hours": 12
+      },
+      "intended_application": "High-temperature dielectric.",
+      "rationale": "Ordered double perovskite with trivalent and pentavalent B-site cations, chosen so that the mean B-site charge is four and the composition is charge balanced. The structure is generated, not relaxed, and the coordinates should be treated as a first guess.",
+      "generator_confidence": {
+        "overall": 0.55,
+        "per_field": {
+          "/composition/formula": 0.7,
+          "/structure/lattice/a": 0.35,
+          "/claimed_properties/0/value": 0.4
+        }
+      }
+    },
+    {
+      "proposal_id": "P-0005",
+      "composition": {
+        "formula": "Fe17O23",
+        "elements": { "Fe": 17, "O": 23 },
+        "charge": 0
+      },
+      "claimed_properties": [
+        { "name": "band_gap", "value": 1.4, "unit": "eV", "basis": "predicted", "confidence": 0.25 }
+      ],
+      "synthesis_hint": {
+        "route": "high_pressure",
+        "precursors": ["Fe", "Fe2O3"],
+        "temperature": 1600,
+        "temperature_unit": "C",
+        "pressure_gpa": 15,
+        "atmosphere": "sealed_ampoule"
+      },
+      "intended_application": "Exploratory iron oxide phase.",
+      "rationale": "An unusual iron-to-oxygen ratio proposed on the basis that intermediate iron oxides are known to exist. Included as a negative control: no such stoichiometry is expected to have been reported.",
+      "generator_confidence": {
+        "overall": 0.2,
+        "per_field": { "/composition/formula": 0.2 }
+      }
+    },
+    {
+      "proposal_id": "P-0006",
+      "composition": {
+        "formula": "MgB2",
+        "elements": { "Mg": 1, "B": 2 }
+      },
+      "structure": {
+        "lattice": {
+          "a": 3.086, "b": 3.086, "c": 3.524,
+          "alpha": 90.0, "beta": 90.0, "gamma": 120.0
+        },
+        "sites": [
+          { "element": "Mg", "frac_coords": [0.0, 0.0, 0.0], "occupancy": 1 },
+          { "element": "B", "frac_coords": [0.3333333333, 0.6666666667, 0.5], "occupancy": 1 },
+          { "element": "B", "frac_coords": [0.6666666667, 0.3333333333, 0.5], "occupancy": 1 }
+        ],
+        "space_group": { "symbol": "P6/mmm", "number": 191 },
+        "source": "experimental"
+      },
+      "claimed_properties": [
+        { "name": "critical_temperature", "value": 39, "unit": "K", "basis": "literature", "confidence": 0.95 }
+      ],
+      "synthesis_hint": {
+        "route": "solid_state",
+        "precursors": ["Mg", "B"],
+        "temperature": 950,
+        "temperature_unit": "C",
+        "atmosphere": "Ar",
+        "duration_hours": 2,
+        "notes": "Magnesium is volatile at this temperature; a sealed vessel with excess magnesium is normal practice."
+      },
+      "intended_application": "Superconducting wire.",
+      "rationale": "A metallic boride included deliberately: charge-neutrality screens built for ionic oxides tend to reject intermetallics and borides, and a verifier that treats such a rejection as a hard failure will discard a material that is not merely real but famous.",
+      "generator_confidence": {
+        "overall": 0.97,
+        "per_field": { "/composition/formula": 0.99, "/claimed_properties/0/value": 0.96 }
+      }
+    }
+  ]
+}

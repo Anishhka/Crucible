@@ -1,0 +1,248 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crucible.spec/schema/run_manifest.schema.json",
+  "title": "Crucible Run Manifest",
+  "description": "Exactly one run_manifest.json per output directory. Written as the first artifact of a run and finalised as the last. The manifest is what makes a set of verdicts interpretable six months later: without the reference-data snapshot identities, 'novel' is not a reproducible claim, and cross-run novelty rates are not comparable.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "manifest_schema_version",
+    "run_id",
+    "crucible_version",
+    "taxonomy_version",
+    "record_schema_version",
+    "reward_fn_id",
+    "input",
+    "config",
+    "reference_data",
+    "counts",
+    "aggregates",
+    "outputs",
+    "provenance"
+  ],
+  "properties": {
+    "manifest_schema_version": { "const": "1-0-0" },
+    "run_id": {
+      "description": "Unique per invocation. MUST be deterministic under the reproducibility contract: two runs with identical inputs, config, seed and --now MUST produce the same run_id.",
+      "type": "string", "minLength": 1, "maxLength": 128
+    },
+    "crucible_version": { "type": "string", "maxLength": 64 },
+    "taxonomy_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "record_schema_version": { "const": "1-0-0" },
+    "reward_fn_id": { "type": "string", "maxLength": 128 },
+    "status": {
+      "description": "Overall outcome, consistent with the process exit code.",
+      "enum": ["ok", "partial", "failed"]
+    },
+    "input": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["files"],
+      "properties": {
+        "files": {
+          "description": "Every input file read, or attempted. Empty only when the run exited 3 before any file could be identified.",
+          "type": "array",
+          "minItems": 0,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["name", "sha256", "bytes", "batch_id", "schema_version"],
+            "properties": {
+              "name": {
+                "description": "Basename only. Absolute paths from the evaluator's filesystem MUST NOT appear anywhere in a graded artifact.",
+                "type": "string", "maxLength": 256, "pattern": "^[A-Za-z0-9._-]+$"
+              },
+              "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+              "bytes": { "type": "integer", "minimum": 0 },
+              "batch_id": { "type": ["string", "null"], "maxLength": 64 },
+              "schema_version": { "type": ["string", "null"], "maxLength": 32 },
+              "accepted": { "type": "boolean" },
+              "reject_reason": { "type": ["string", "null"], "maxLength": 500 }
+            }
+          }
+        }
+      }
+    },
+    "config": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sha256", "resolved", "offline", "seed"],
+      "properties": {
+        "sha256": {
+          "description": "Hash of the FULLY RESOLVED configuration, after defaults and any environment overrides are applied. Hashing only the user-supplied file makes two materially different runs look identical.",
+          "type": "string", "pattern": "^[0-9a-f]{64}$"
+        },
+        "resolved": {
+          "description": "The fully resolved configuration, with every secret redacted. A secret appearing here is a disqualifying defect.",
+          "type": "object", "additionalProperties": true
+        },
+        "offline": { "type": "boolean" },
+        "seed": { "type": "integer" },
+        "providers_enabled": { "type": "array", "items": { "type": "string", "maxLength": 64 } },
+        "providers_unavailable": {
+          "description": "Providers that were configured but could not answer. Their presence is what justifies exit code 4.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["provider", "reason"],
+            "properties": {
+              "provider": { "type": "string", "maxLength": 64 },
+              "reason": { "type": "string", "maxLength": 500 }
+            }
+          }
+        }
+      }
+    },
+    "reference_data": {
+      "description": "Every corpus consulted, with the exact version consulted. This array is NOT optional, and for any run that reached a verdict it MUST NOT be empty: a novelty verdict is a statement relative to a specific corpus at a specific version. It is empty only on a run that exited 3, where no proposal was read and no corpus was consulted; inventing an entry there would be a claim about a lookup that never happened.",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "provider", "kind", "snapshot", "sha256"],
+        "properties": {
+          "id": { "type": "string", "maxLength": 128 },
+          "provider": { "type": "string", "maxLength": 64 },
+          "kind": { "enum": ["snapshot", "cassette", "live"] },
+          "snapshot": {
+            "description": "A version, release tag, dump date, or cassette-set identifier. 'latest' is not an acceptable value.",
+            "type": "string", "maxLength": 128
+          },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "n_entries": { "type": ["integer", "null"], "minimum": 0 },
+          "coverage_note": {
+            "description": "What this corpus does and does not cover. An honest statement here is worth more than a large number of entries.",
+            "type": ["string", "null"], "maxLength": 1000
+          },
+          "license": { "type": ["string", "null"], "maxLength": 128 },
+          "retrieved_at": { "type": ["string", "null"], "maxLength": 64 }
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["proposals_in", "verdicts_out", "accepted", "rejected", "unverifiable", "quarantined"],
+      "properties": {
+        "proposals_in": {
+          "description": "Number of proposal entries present in the input, including ones that were later quarantined.",
+          "type": "integer", "minimum": 0
+        },
+        "verdicts_out": { "type": "integer", "minimum": 0 },
+        "accepted": { "type": "integer", "minimum": 0 },
+        "rejected": { "type": "integer", "minimum": 0 },
+        "unverifiable": { "type": "integer", "minimum": 0 },
+        "quarantined": {
+          "description": "Proposals that could not be admitted to the pipeline at all. proposals_in MUST equal verdicts_out + quarantined; a run that silently loses records fails this identity.",
+          "type": "integer", "minimum": 0
+        },
+        "out_of_scope": { "type": "integer", "minimum": 0 },
+        "duplicates_within_batch": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "aggregates": {
+      "description": "The batch-level signal. This is the part an operator reads to decide what to change about the generator. 'reward' is required for every run that produced at least one verdict, and is omitted only on a run that exited 3, because a mean over zero verdicts is not a number.",
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code_histogram", "field_histogram"],
+      "properties": {
+        "code_histogram": {
+          "description": "violation code -> count, over this run.",
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 },
+          "propertyNames": { "type": "string", "maxLength": 96 }
+        },
+        "field_histogram": {
+          "description": "JSON pointer -> count. Which FIELD of the generator's output is most often wrong.",
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 },
+          "propertyNames": { "type": "string", "maxLength": 256 }
+        },
+        "code_by_field": {
+          "description": "'<code>|<json_pointer>' -> count. The single most actionable table this system produces.",
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 },
+          "propertyNames": { "type": "string", "maxLength": 400 }
+        },
+        "reward": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["mean", "min", "max"],
+          "properties": {
+            "mean": { "type": "number" },
+            "min": { "type": "number" },
+            "max": { "type": "number" },
+            "p50": { "type": ["number", "null"] },
+            "component_means": {
+              "type": "object",
+              "additionalProperties": { "type": "number" },
+              "propertyNames": { "type": "string", "maxLength": 64 }
+            }
+          }
+        },
+        "novelty_tier_histogram": {
+          "type": "object",
+          "additionalProperties": { "type": "integer", "minimum": 0 }
+        },
+        "calibration": {
+          "description": "How well the generator's self-reported confidence tracked reality. Null when the generator supplied no confidences.",
+          "type": ["object", "null"],
+          "additionalProperties": false,
+          "properties": {
+            "n_pairs": { "type": "integer", "minimum": 0 },
+            "brier_score": { "type": ["number", "null"] },
+            "mean_confidence_when_correct": { "type": ["number", "null"] },
+            "mean_confidence_when_incorrect": { "type": ["number", "null"] },
+            "method": { "type": ["string", "null"], "maxLength": 256 }
+          }
+        }
+      }
+    },
+    "outputs": {
+      "description": "Every artifact written, with its hash. Enables an independent party to confirm nothing was altered after the run. For a run that exits 0 or 4 this lists the full artifact set of CONTRACT.md section 4; for a run that exits 3 it lists whatever was written, which may be nothing beyond the manifest itself.",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "bytes"],
+        "properties": {
+          "path": { "type": "string", "maxLength": 512, "pattern": "^[A-Za-z0-9._/-]+$" },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+          "bytes": { "type": "integer", "minimum": 0 },
+          "graded": {
+            "description": "Whether this artifact is subject to the byte-identity requirement.",
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "tool_versions": {
+      "description": "Pinned versions of every library whose behaviour can move a number in the output.",
+      "type": "object",
+      "additionalProperties": { "type": "string", "maxLength": 64 },
+      "propertyNames": { "type": "string", "maxLength": 64 }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["logical_time", "environment"],
+      "properties": {
+        "logical_time": {
+          "description": "The RFC 3339 instant the run should CLAIM to have happened, taken from --now or SOURCE_DATE_EPOCH. This is a graded, deterministic field. Wall-clock time MUST NOT appear here.",
+          "type": "string", "maxLength": 64
+        },
+        "git_commit": { "type": ["string", "null"], "maxLength": 64 },
+        "git_dirty": { "type": ["boolean", "null"] },
+        "environment": {
+          "description": "The ONLY subtree of any graded artifact that is exempt from byte-identity. Everything nondeterministic (wall-clock timestamps, durations, hostnames, pids, absolute paths) belongs here and nowhere else.",
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "notes": { "type": "array", "items": { "type": "string", "maxLength": 1000 } }
+  }
+}

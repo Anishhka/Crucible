@@ -1,0 +1,25 @@
+# Force LF for every text file in this repository.
+#
+# This is a correctness requirement, not a style preference. The committed
+# corpora under src/crucible/reference_data/ are hashed at runtime and that
+# hash is written into run_manifest.reference_data[].sha256. If git rewrites
+# those files to CRLF on checkout, the hash differs between a Windows checkout
+# and a Linux one, two runs of the same version stop agreeing, and the
+# reproducibility guarantee in CONTRACT.md §6 quietly stops holding.
+#
+# The same applies to the JSON Schemas emitted by `crucible schema --emit`.
+
+* text=auto eol=lf
+
+*.py    text eol=lf
+*.json  text eol=lf
+*.yml   text eol=lf
+*.yaml  text eol=lf
+*.md    text eol=lf
+*.lock  text eol=lf
+*.sh    text eol=lf
+*.svg   text eol=lf
+*.html  text eol=lf
+Dockerfile text eol=lf
+
+# Nothing in this repository is binary, so there is no exclusion list.

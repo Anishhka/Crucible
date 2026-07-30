@@ -1,0 +1,95 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://crucible.spec/schema/feedback_bundle.schema.json",
+  "title": "Crucible Feedback Bundle Index",
+  "description": "Exactly one feedback/index.json per output directory. The feedback bundle is the product: everything Crucible learned about the generator, arranged so a person improving that generator can act on it. Every file listed here MUST be a pure projection of verdicts.jsonl -- regenerable from the verdict records alone, containing no fact that is not already in them.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "run_id", "taxonomy_version", "projections", "recommendations"],
+  "properties": {
+    "schema_version": { "const": "1-0-0" },
+    "run_id": { "type": "string", "maxLength": 128 },
+    "taxonomy_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "reward_fn_id": { "type": "string", "maxLength": 128 },
+    "projections": {
+      "description": "The emitted projections. At minimum, the scalar-reward projection and the preference projection MUST be present, even when one of them is empty (an empty file with zero rows is a legitimate, informative result; a missing file is not).",
+      "type": "array",
+      "minItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "path", "format", "n_rows", "row_spec", "eligibility"],
+        "properties": {
+          "name": {
+            "enum": ["scalar_reward", "preference_pairs", "unpaired_labels", "eval_rows", "violation_table", "calibration_pairs"]
+          },
+          "path": { "type": "string", "maxLength": 512, "pattern": "^[A-Za-z0-9._/-]+$" },
+          "format": {
+            "description": "How rows are laid out on disk. jsonl: exactly one row per non-blank line. json: the file MUST be a JSON array whose elements are the rows. csv: the file MUST begin with a single header line naming the row_spec keys, followed by one RFC 4180 record per row.",
+            "enum": ["jsonl", "json", "csv"]
+          },
+          "n_rows": { "type": "integer", "minimum": 0 },
+          "row_spec": {
+            "description": "The exact keys present on every row of this projection, sorted. A consumer must be able to write a reader from this field alone. Every row of every JSONL projection MUST carry 'record_id' -- the record_id of the verdict record it projects -- so any row can be traced back to its canonical record; 'record_id' MUST therefore appear in every row_spec.",
+            "type": "array", "minItems": 1,
+            "contains": { "const": "record_id" },
+            "items": { "type": "string", "maxLength": 64 }
+          },
+          "eligibility": {
+            "description": "Which verdict records contributed rows, and which were deliberately excluded. Records with status 'unverifiable' MUST be excluded from every training projection and that exclusion MUST be stated here.",
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["included_statuses", "excluded_statuses", "rationale"],
+            "properties": {
+              "included_statuses": { "type": "array", "items": { "enum": ["accepted", "rejected", "unverifiable"] } },
+              "excluded_statuses": { "type": "array", "items": { "enum": ["accepted", "rejected", "unverifiable"] } },
+              "rationale": { "type": "string", "maxLength": 1000 }
+            }
+          },
+          "sha256": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+        }
+      }
+    },
+    "recommendations": {
+      "description": "Evidence-backed, prioritised changes to the generator. Each recommendation MUST cite the aggregate evidence that motivated it; a recommendation with no supporting count is an opinion and does not belong in a machine-generated artifact.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "priority", "target", "statement", "evidence"],
+        "properties": {
+          "id": { "type": "string", "maxLength": 64 },
+          "priority": { "type": "integer", "minimum": 1 },
+          "target": {
+            "description": "What should change: the prompt, the decoding parameters, the training data, or the schema the generator is asked to emit.",
+            "enum": ["prompt", "decoding", "training_data", "output_schema", "tooling"]
+          },
+          "statement": { "type": "string", "maxLength": 2000 },
+          "evidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["codes", "n_affected", "fraction_affected"],
+            "properties": {
+              "codes": { "type": "array", "minItems": 1, "items": { "type": "string", "maxLength": 96 } },
+              "json_pointers": { "type": "array", "items": { "type": "string", "maxLength": 256 } },
+              "n_affected": {
+                "description": "The number of DISTINCT verdict records affected, not the number of findings. A code that fires twice on one record counts once.",
+                "type": "integer", "minimum": 1
+              },
+              "fraction_affected": { "type": "number", "minimum": 0, "maximum": 1 },
+              "example_proposal_ids": { "type": "array", "maxItems": 5, "items": { "type": "string", "maxLength": 64 } }
+            }
+          },
+          "expected_effect": { "type": ["string", "null"], "maxLength": 1000 },
+          "confidence": { "type": "number", "minimum": 0, "maximum": 1 }
+        }
+      }
+    },
+    "caveats": {
+      "description": "What this feedback bundle cannot tell you. Required to be non-empty: any verifier built on positive-only reference data has systematic blind spots, and a bundle that does not name its own is overclaiming. Every caveat MUST be a full sentence naming a condition and its consequence; a phrase such as 'incomplete corpus' names neither, which is why a minimum length is enforced here.",
+      "type": "array",
+      "minItems": 1,
+      "items": { "type": "string", "minLength": 41, "maxLength": 1000 }
+    }
+  }
+}

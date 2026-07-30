@@ -1,0 +1,22 @@
+{
+  "schema_version": "1-0-0",
+  "batch_id": "public-malformed-nan-004",
+  "generator": { "model_id": "matgen-inorganic-preview", "prompt_id": "hypothesis.inorganic@2.4.0" },
+  "objective": "Envelope-level defect: a bare non-finite literal. Several widely used decoders accept these without complaint.",
+  "proposals": [
+    {
+      "proposal_id": "N-0001",
+      "composition": { "formula": "TiO2" },
+      "claimed_properties": [
+        { "name": "band_gap", "value": NaN, "unit": "eV" }
+      ]
+    },
+    {
+      "proposal_id": "N-0002",
+      "composition": { "formula": "Fe2O3" },
+      "claimed_properties": [
+        { "name": "density", "value": Infinity, "unit": "g/cm3" }
+      ]
+    }
+  ]
+}

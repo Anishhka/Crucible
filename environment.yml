@@ -1,0 +1,24 @@
+# Crucible runtime environment.
+#
+# Every dependency carries an explicit version (CONTRACT.md §8 item 2).
+# environment.lock.yml is the fully-resolved export and is what the image
+# actually builds from; this file is the human-readable intent.
+#
+# Deliberately minimal: Crucible does its own crystallography and chemistry
+# arithmetic in pure Python (see DECISIONS.md). No pymatgen, no numpy, no
+# matplotlib, no accelerator runtime -- figures are emitted as hand-written
+# SVG so that nothing in the graded path depends on a font cache or a
+# rendering backend, both of which are sources of non-determinism.
+name: crucible
+channels:
+  - conda-forge
+  - nodefaults
+dependencies:
+  - python=3.11.9
+  - pip=24.0
+  - pip:
+      - jsonschema==4.23.0
+      - attrs==24.2.0
+      - jsonschema-specifications==2023.12.1
+      - referencing==0.35.1
+      - rpds-py==0.20.0

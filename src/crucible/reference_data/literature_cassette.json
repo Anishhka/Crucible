@@ -1,0 +1,331 @@
+{
+  "corpus_id": "literature_cassette",
+  "corpus_version": "2026.03-r1",
+  "coverage_note": "A REPLAY cassette of recorded bibliographic queries. Coverage is the set of questions that were recorded, not a corpus of documents. A composition absent from this cassette yields `unavailable`, never `miss`: the question was never asked, and recording that as an absence of prior art is the most consequential error this system can make.",
+  "entries": [
+    {
+      "identifier": "lit-0035",
+      "key": "Al:2|Mg:1|O:4",
+      "n_documents": 833,
+      "note": "reported",
+      "provenance": "literature",
+      "reduced_formula": "MgAl2O4"
+    },
+    {
+      "identifier": "lit-0009",
+      "key": "Al:2|O:3",
+      "n_documents": 2901,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "Al2O3"
+    },
+    {
+      "identifier": "lit-0004",
+      "key": "B:2|Mg:1",
+      "n_documents": 1877,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "MgB2"
+    },
+    {
+      "identifier": "lit-0005",
+      "key": "Ba:1|O:3|Ti:1",
+      "n_documents": 2304,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "BaTiO3"
+    },
+    {
+      "identifier": "lit-0007",
+      "key": "Ba:2|Cu:3|O:7|Y:1",
+      "n_documents": 2765,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "YBa2Cu3O7"
+    },
+    {
+      "identifier": "lit-0020",
+      "key": "Ba:2|Nb:1|O:6|Sc:1",
+      "n_documents": 47,
+      "note": "sparsely reported",
+      "provenance": "literature",
+      "reduced_formula": "Ba2ScNbO6"
+    },
+    {
+      "identifier": "lit-0023",
+      "key": "Bi:2|Te:3",
+      "n_documents": 1655,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "Bi2Te3"
+    },
+    {
+      "identifier": "lit-0036",
+      "key": "C:1|Ca:1|O:3",
+      "n_documents": 2711,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "CaCO3"
+    },
+    {
+      "identifier": "lit-0040",
+      "key": "C:1|H:1",
+      "n_documents": 1902,
+      "note": "recorded query; polystyrene repeat unit",
+      "provenance": "literature",
+      "reduced_formula": "CH"
+    },
+    {
+      "identifier": "lit-0038",
+      "key": "Ca:1|F:2",
+      "n_documents": 744,
+      "note": "reported",
+      "provenance": "literature",
+      "reduced_formula": "CaF2"
+    },
+    {
+      "identifier": "lit-0030",
+      "key": "Ce:1|O:2",
+      "n_documents": 1602,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "CeO2"
+    },
+    {
+      "identifier": "lit-0017",
+      "key": "Cl:1|Na:1",
+      "n_documents": 1533,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "NaCl"
+    },
+    {
+      "identifier": "lit-0018",
+      "key": "Co:1|Li:1|O:2",
+      "n_documents": 1744,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "LiCoO2"
+    },
+    {
+      "identifier": "lit-0014",
+      "key": "Cr:2|O:3",
+      "n_documents": 655,
+      "note": "reported",
+      "provenance": "literature",
+      "reduced_formula": "Cr2O3"
+    },
+    {
+      "identifier": "lit-0039",
+      "key": "Cu:1|H:10|O:9|S:1",
+      "n_documents": 288,
+      "note": "recorded as the pentahydrate",
+      "provenance": "literature",
+      "reduced_formula": "CuSO9H10"
+    },
+    {
+      "identifier": "lit-0026",
+      "key": "Cu:1|In:1|Se:2",
+      "n_documents": 1244,
+      "note": "reported",
+      "provenance": "literature",
+      "reduced_formula": "CuInSe2"
+    },
+    {
+      "identifier": "lit-0025",
+      "key": "Cu:2|S:4|Sn:1|Zn:1",
+      "n_documents": 977,
+      "note": "reported",
+      "provenance": "literature",
+      "reduced_formula": "Cu2ZnSnS4"
+    },
+    {
+      "identifier": "lit-0015",
+      "key": "F:4|K:2|Ni:1",
+      "n_documents": 402,
+      "note": "reported as a structure type",
+      "provenance": "literature",
+      "reduced_formula": "K2NiF4"
+    },
+    {
+      "identifier": "lit-0032",
+      "key": "Fe:17|O:23",
+      "n_documents": 0,
+      "note": "recorded query, no documents found",
+      "provenance": "literature",
+      "reduced_formula": "Fe17O23"
+    },
+    {
+      "identifier": "lit-0003",
+      "key": "Fe:1|Li:1|O:4|P:1",
+      "n_documents": 2610,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "LiFePO4"
+    },
+    {
+      "identifier": "lit-0002",
+      "key": "Fe:2|O:3",
+      "n_documents": 3944,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "Fe2O3"
+    },
+    {
+      "identifier": "lit-0031",
+      "key": "Fe:3|O:4",
+      "n_documents": 2455,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "Fe3O4"
+    },
+    {
+      "identifier": "lit-0010",
+      "key": "Ga:1|N:1",
+      "n_documents": 2233,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "GaN"
+    },
+    {
+      "identifier": "lit-0022",
+      "key": "La:1|Mn:1|O:3",
+      "n_documents": 1203,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "LaMnO3"
+    },
+    {
+      "identifier": "lit-0019",
+      "key": "La:3|Li:7|O:12|Zr:2",
+      "n_documents": 921,
+      "note": "reported",
+      "provenance": "literature",
+      "reduced_formula": "Li7La3Zr2O12"
+    },
+    {
+      "identifier": "lit-0034",
+      "key": "Li:1|Nb:1|O:3",
+      "n_documents": 1466,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "LiNbO3"
+    },
+    {
+      "identifier": "lit-0037",
+      "key": "Mg:1|O:1",
+      "n_documents": 1955,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "MgO"
+    },
+    {
+      "identifier": "lit-0024",
+      "key": "Mo:1|S:2",
+      "n_documents": 2988,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "MoS2"
+    },
+    {
+      "identifier": "lit-0028",
+      "key": "N:1|Ti:1",
+      "n_documents": 1077,
+      "note": "reported",
+      "provenance": "literature",
+      "reduced_formula": "TiN"
+    },
+    {
+      "identifier": "lit-0027",
+      "key": "N:4|Si:3",
+      "n_documents": 1390,
+      "note": "reported",
+      "provenance": "literature",
+      "reduced_formula": "Si3N4"
+    },
+    {
+      "identifier": "lit-0013",
+      "key": "Nb:2|O:5",
+      "n_documents": 812,
+      "note": "reported",
+      "provenance": "literature",
+      "reduced_formula": "Nb2O5"
+    },
+    {
+      "identifier": "lit-0008",
+      "key": "O:1|Zn:1",
+      "n_documents": 3512,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "ZnO"
+    },
+    {
+      "identifier": "lit-0016",
+      "key": "O:2|Si:1",
+      "n_documents": 4102,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "SiO2"
+    },
+    {
+      "identifier": "lit-0001",
+      "key": "O:2|Ti:1",
+      "n_documents": 4821,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "TiO2"
+    },
+    {
+      "identifier": "lit-0029",
+      "key": "O:2|Zr:1",
+      "n_documents": 2044,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "ZrO2"
+    },
+    {
+      "identifier": "lit-0033",
+      "key": "O:3|Pb:1|Ti:1",
+      "n_documents": 1188,
+      "note": "reported",
+      "provenance": "literature",
+      "reduced_formula": "PbTiO3"
+    },
+    {
+      "identifier": "lit-0021",
+      "key": "O:3|Ru:1|Sr:1",
+      "n_documents": 588,
+      "note": "reported",
+      "provenance": "literature",
+      "reduced_formula": "SrRuO3"
+    },
+    {
+      "identifier": "lit-0006",
+      "key": "O:3|Sr:1|Ti:1",
+      "n_documents": 1988,
+      "note": "extensively reported",
+      "provenance": "literature",
+      "reduced_formula": "SrTiO3"
+    },
+    {
+      "identifier": "lit-0011",
+      "key": "O:3|W:1",
+      "n_documents": 1120,
+      "note": "reported",
+      "provenance": "literature",
+      "reduced_formula": "WO3"
+    },
+    {
+      "identifier": "lit-0012",
+      "key": "O:5|V:2",
+      "n_documents": 1004,
+      "note": "reported",
+      "provenance": "literature",
+      "reduced_formula": "V2O5"
+    }
+  ],
+  "evidence_class": "literature",
+  "kind": "cassette",
+  "license": "CC0-1.0 (hand-authored, no third-party data)",
+  "n_entries": 40
+}

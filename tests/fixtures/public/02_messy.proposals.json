@@ -1,0 +1,206 @@
+{
+  "schema_version": "1-0-0",
+  "batch_id": "public-messy-002",
+  "created_at": "2026-03-02T11:40:00",
+  "generator": {
+    "model_id": "matgen-inorganic-preview",
+    "prompt_id": "hypothesis.inorganic@2.4.0",
+    "temperature": 1.1,
+    "seed": 4471
+  },
+  "objective": "A batch produced at elevated sampling temperature. Every record below is syntactically valid against the input schema; the defects are all semantic, which is precisely why a schema check alone is not a data-quality strategy.",
+  "proposals": [
+    {
+      "proposal_id": "M-0001",
+      "composition": {
+        "formula": "Fe4O6",
+        "elements": { "Fe": 4, "O": 6 }
+      },
+      "claimed_properties": [
+        { "name": "band_gap", "value": 2100, "unit": "meV", "basis": "predicted", "confidence": 0.6 }
+      ],
+      "intended_application": "Photoanode.",
+      "rationale": "Written as a supercell rather than in reduced form, and with the band gap quoted in millielectronvolts while other records in the same batch use electronvolts. Both spellings describe a material that is extremely well known.",
+      "generator_confidence": { "overall": 0.6 }
+    },
+    {
+      "proposal_id": "M-0002",
+      "composition": {
+        "formula": "BaTiO3",
+        "elements": { "Ba": 1, "Ti": 1, "O": 2 }
+      },
+      "claimed_properties": [
+        { "name": "curie_temperature", "value": 393, "unit": "K", "basis": "literature", "confidence": 0.9 }
+      ],
+      "intended_application": "Ferroelectric capacitor dielectric.",
+      "rationale": "The formula string and the elements map disagree about the oxygen count. Only one of them can be right, and a pipeline that silently prefers whichever it happens to read first will produce a confident answer about the wrong material.",
+      "generator_confidence": { "overall": 0.88 }
+    },
+    {
+      "proposal_id": "M-0003",
+      "composition": {
+        "formula": "SrTiO3",
+        "elements": { "Sr": 1, "Ti": 1, "O": 3 }
+      },
+      "claimed_properties": [
+        { "name": "band_gap", "value": 3.25, "unit": "eV", "basis": "literature", "confidence": 0.9 },
+        { "name": "dielectric_constant", "value": -999, "unit": "1", "basis": "unknown", "confidence": 0.1 }
+      ],
+      "synthesis_hint": {
+        "route": "solid_state",
+        "precursors": ["SrCO3", "TiO2"],
+        "temperature": 1200,
+        "temperature_unit": "C",
+        "atmosphere": "air"
+      },
+      "intended_application": "Substrate for oxide epitaxy.",
+      "rationale": "One property carries a placeholder value that is a perfectly ordinary number. It is finite, it is the right type, and it is inside any range check that was not written with placeholders in mind.",
+      "generator_confidence": { "overall": 0.7 }
+    },
+    {
+      "proposal_id": "M-0004",
+      "composition": {
+        "formula": "C8H8",
+        "elements": { "C": 8, "H": 8 }
+      },
+      "claimed_properties": [
+        { "name": "glass_transition_temperature", "value": 373, "unit": "K", "basis": "literature", "confidence": 0.8 }
+      ],
+      "intended_application": "Dielectric encapsulation layer.",
+      "rationale": "A polymer repeat unit. This is not an inorganic crystalline solid and is outside the domain the tool claims competence over. The correct response is to say so; it is not to run a convex-hull argument on polystyrene and report the result.",
+      "generator_confidence": { "overall": 0.5 }
+    },
+    {
+      "proposal_id": "M-0005",
+      "composition": {
+        "formula": "ZnO",
+        "elements": { "Zn": 1, "O": 1 }
+      },
+      "structure": {
+        "lattice": {
+          "a": 3.25, "b": 3.25, "c": 5.21,
+          "alpha": 90.0, "beta": 90.0, "gamma": 120.0
+        },
+        "sites": [
+          { "element": "Zn", "frac_coords": [0.3333333333, 0.6666666667, 0.0], "occupancy": 1 },
+          { "element": "O", "frac_coords": [0.3333333333, 0.6666666667, 0.0038], "occupancy": 1 }
+        ],
+        "space_group": { "symbol": "P6_3mc", "number": 186 },
+        "source": "generated"
+      },
+      "claimed_properties": [
+        { "name": "band_gap", "value": 3.37, "unit": "eV", "basis": "literature", "confidence": 0.93 }
+      ],
+      "intended_application": "Transparent conducting oxide.",
+      "rationale": "The composition is real and the lattice is close to correct, but the two sites have been placed almost on top of each other. The separation is a small fraction of an angstrom, which is not a bond length.",
+      "generator_confidence": {
+        "overall": 0.8,
+        "per_field": { "/structure/sites/1/frac_coords": 0.75 }
+      }
+    },
+    {
+      "proposal_id": "M-0006",
+      "composition": {
+        "formula": "NaCl",
+        "elements": { "Na": 1, "Cl": 1 }
+      },
+      "structure": {
+        "lattice": {
+          "a": 5.64, "b": 5.64, "c": 5.64,
+          "alpha": 90.0, "beta": 90.0, "gamma": 90.0
+        },
+        "sites": [
+          { "element": "Na", "frac_coords": [0.0, 0.0, 0.0], "occupancy": 1 },
+          { "element": "Cl", "frac_coords": [0.5, 0.5, 0.5], "occupancy": 1 }
+        ],
+        "space_group": { "symbol": "P1", "number": 1 },
+        "source": "generated"
+      },
+      "intended_application": "Calibration standard.",
+      "rationale": "The coordinates describe a rock-salt arrangement, but the asserted space group is the trivial one. Whether that counts as a disagreement depends entirely on the tolerance used to determine symmetry, which is why the tolerance has to be recorded rather than assumed.",
+      "generator_confidence": { "overall": 0.6 }
+    },
+    {
+      "proposal_id": "M-0007",
+      "composition": {
+        "formula": "Al2O3",
+        "elements": { "Al": 2, "O": 3 }
+      },
+      "structure": {
+        "lattice": {
+          "a": 4.76, "b": 4.76, "c": 12.99,
+          "alpha": 90.0, "beta": 90.0, "gamma": 120.0,
+          "length_unit": "nm"
+        },
+        "sites": [
+          { "element": "Al", "frac_coords": [0.0, 0.0, 0.3523], "occupancy": 1 },
+          { "element": "Al", "frac_coords": [0.0, 0.0, 0.6477], "occupancy": 1 },
+          { "element": "O", "frac_coords": [0.3064, 0.0, 0.25], "occupancy": 1 }
+        ],
+        "space_group": { "symbol": "R-3c", "number": 167 },
+        "source": "generated"
+      },
+      "claimed_properties": [
+        { "name": "band_gap", "value": 8.8, "unit": "eV", "basis": "literature", "confidence": 0.9 }
+      ],
+      "intended_application": "Insulating barrier.",
+      "rationale": "Corundum lattice parameters, correct in magnitude, but declared in nanometres. A pipeline that ignores the unit field will build a cell a thousand times too large and will find that nothing is bonded to anything.",
+      "generator_confidence": { "overall": 0.75 }
+    },
+    {
+      "proposal_id": "M-0008",
+      "composition": {
+        "formula": "K2NiF4",
+        "elements": { "K": 2, "Ni": 1, "F": 4 }
+      },
+      "claimed_properties": [
+        { "name": "band_gap", "value": -1.2, "unit": "eV", "basis": "predicted", "confidence": 0.4 },
+        { "name": "density", "value": 3.1, "unit": "g/cm3", "basis": "predicted", "confidence": 0.5 }
+      ],
+      "intended_application": "Layered magnetic insulator.",
+      "rationale": "A negative band gap is not a small band gap. It is not a physically meaningful value for the quantity as named, and no amount of uncertainty makes it one.",
+      "generator_confidence": {
+        "overall": 0.4,
+        "per_field": { "/claimed_properties/0/value": 0.85 }
+      }
+    },
+    {
+      "proposal_id": "M-0003",
+      "composition": {
+        "formula": "SrTiO3",
+        "elements": { "Sr": 1, "Ti": 1, "O": 3 }
+      },
+      "claimed_properties": [
+        { "name": "band_gap", "value": 3.2, "unit": "eV", "basis": "predicted", "confidence": 0.5 }
+      ],
+      "intended_application": "Substrate.",
+      "rationale": "This record reuses an identifier that already appears earlier in the batch, with different content. It is not a correction and it is not a duplicate to be silently collapsed; it is a defect in the generator, and both records have to be accounted for.",
+      "generator_confidence": { "overall": 0.5 }
+    },
+    {
+      "proposal_id": "M-0009",
+      "composition": {
+        "formula": "YBa2Cu3O7",
+        "elements": { "Y": 1, "Ba": 2, "Cu": 3, "O": 7 }
+      },
+      "claimed_properties": [
+        { "name": "critical_temperature", "value": 92, "unit": "K", "basis": "literature", "confidence": 0.95 }
+      ],
+      "synthesis_hint": {
+        "route": "solid_state",
+        "precursors": ["Y2O3", "BaCO3", "CuO"],
+        "temperature": 950,
+        "temperature_unit": "C",
+        "atmosphere": "H2",
+        "duration_hours": 24,
+        "notes": "Reducing atmosphere proposed to improve densification."
+      },
+      "intended_application": "High-temperature superconductor.",
+      "rationale": "The material is real and the temperature is reasonable, but the proposed atmosphere is reducing and this compound requires oxygen. The composition and the stated processing conditions are mutually inconsistent, and a verifier that checks only the composition will miss it entirely.",
+      "generator_confidence": {
+        "overall": 0.85,
+        "per_field": { "/synthesis_hint/atmosphere": 0.8 }
+      }
+    }
+  ]
+}

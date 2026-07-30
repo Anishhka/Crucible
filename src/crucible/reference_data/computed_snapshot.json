@@ -1,0 +1,396 @@
+{
+  "corpus_id": "computed_snapshot",
+  "corpus_version": "2026.03-r1",
+  "coverage_note": "Compositions of the kind that populate large density-functional corpora: plausible substitutional variants of known structure types, most of which have never been made. A hit here is evidence that someone calculated it, which is a materially weaker claim than an experimental determination, and is tiered as computed_only.",
+  "entries": [
+    {
+      "identifier": "cmp-0009",
+      "key": "Al:1|O:3|Y:1",
+      "note": "computed perovskite",
+      "provenance": "computed",
+      "reduced_formula": "YAlO3"
+    },
+    {
+      "identifier": "cmp-0046",
+      "key": "Al:1|Sb:1",
+      "note": "computed antimonide",
+      "provenance": "computed",
+      "reduced_formula": "AlSb"
+    },
+    {
+      "identifier": "cmp-0044",
+      "key": "As:1|B:1",
+      "note": "computed boron arsenide",
+      "provenance": "computed",
+      "reduced_formula": "BAs"
+    },
+    {
+      "identifier": "cmp-0045",
+      "key": "B:1|Sb:1",
+      "note": "computed boron antimonide",
+      "provenance": "computed",
+      "reduced_formula": "BSb"
+    },
+    {
+      "identifier": "cmp-0006",
+      "key": "Ba:1|Hf:1|O:3",
+      "note": "computed perovskite",
+      "provenance": "computed",
+      "reduced_formula": "BaHfO3"
+    },
+    {
+      "identifier": "cmp-0001",
+      "key": "Ba:1|O:3|Sc:1",
+      "note": "hypothetical perovskite, computed entry",
+      "provenance": "computed",
+      "reduced_formula": "BaScO3"
+    },
+    {
+      "identifier": "cmp-0004",
+      "key": "Ba:1|O:3|Zr:1",
+      "note": "computed perovskite",
+      "provenance": "computed",
+      "reduced_formula": "BaZrO3"
+    },
+    {
+      "identifier": "cmp-0013",
+      "key": "Ba:2|In:1|Nb:1|O:6",
+      "note": "computed double perovskite",
+      "provenance": "computed",
+      "reduced_formula": "Ba2InNbO6"
+    },
+    {
+      "identifier": "cmp-0012",
+      "key": "Ba:2|Nb:1|O:6|Y:1",
+      "note": "computed double perovskite",
+      "provenance": "computed",
+      "reduced_formula": "Ba2YNbO6"
+    },
+    {
+      "identifier": "cmp-0027",
+      "key": "Ba:2|O:4|Si:1",
+      "note": "computed silicate",
+      "provenance": "computed",
+      "reduced_formula": "Ba2SiO4"
+    },
+    {
+      "identifier": "cmp-0011",
+      "key": "Ba:2|O:6|Sc:1|Ta:1",
+      "note": "computed double perovskite",
+      "provenance": "computed",
+      "reduced_formula": "Ba2ScTaO6"
+    },
+    {
+      "identifier": "cmp-0003",
+      "key": "Ca:1|O:3|Sc:1",
+      "note": "hypothetical perovskite, computed entry",
+      "provenance": "computed",
+      "reduced_formula": "CaScO3"
+    },
+    {
+      "identifier": "cmp-0052",
+      "key": "Ca:1|Se:1",
+      "note": "computed selenide",
+      "provenance": "computed",
+      "reduced_formula": "CaSe"
+    },
+    {
+      "identifier": "cmp-0015",
+      "key": "Ca:2|Nb:1|O:6|Sc:1",
+      "note": "computed double perovskite",
+      "provenance": "computed",
+      "reduced_formula": "Ca2ScNbO6"
+    },
+    {
+      "identifier": "cmp-0025",
+      "key": "Ca:2|O:4|Si:1",
+      "note": "computed silicate",
+      "provenance": "computed",
+      "reduced_formula": "Ca2SiO4"
+    },
+    {
+      "identifier": "cmp-0021",
+      "key": "Co:1|Li:1|O:4|P:1",
+      "note": "computed olivine",
+      "provenance": "computed",
+      "reduced_formula": "LiCoPO4"
+    },
+    {
+      "identifier": "cmp-0039",
+      "key": "Co:1|O:3|Ti:1",
+      "note": "computed titanate",
+      "provenance": "computed",
+      "reduced_formula": "CoTiO3"
+    },
+    {
+      "identifier": "cmp-0019",
+      "key": "F:1|Li:1|O:4|P:1|V:1",
+      "note": "computed polyanion cathode",
+      "provenance": "computed",
+      "reduced_formula": "LiVPO4F"
+    },
+    {
+      "identifier": "cmp-0023",
+      "key": "Fe:1|Na:1|O:4|P:1",
+      "note": "computed sodium olivine",
+      "provenance": "computed",
+      "reduced_formula": "NaFePO4"
+    },
+    {
+      "identifier": "cmp-0042",
+      "key": "Fe:1|O:3|Ti:1",
+      "note": "computed ilmenite",
+      "provenance": "computed",
+      "reduced_formula": "FeTiO3"
+    },
+    {
+      "identifier": "cmp-0053",
+      "key": "Fe:4|O:5",
+      "note": "computed intermediate iron oxide",
+      "provenance": "computed",
+      "reduced_formula": "Fe4O5"
+    },
+    {
+      "identifier": "cmp-0055",
+      "key": "Fe:4|O:7",
+      "note": "computed intermediate iron oxide",
+      "provenance": "computed",
+      "reduced_formula": "Fe4O7"
+    },
+    {
+      "identifier": "cmp-0054",
+      "key": "Fe:5|O:6",
+      "note": "computed intermediate iron oxide",
+      "provenance": "computed",
+      "reduced_formula": "Fe5O6"
+    },
+    {
+      "identifier": "cmp-0047",
+      "key": "Ga:1|Sb:1",
+      "note": "computed antimonide",
+      "provenance": "computed",
+      "reduced_formula": "GaSb"
+    },
+    {
+      "identifier": "cmp-0007",
+      "key": "Hf:1|O:3|Sr:1",
+      "note": "computed perovskite",
+      "provenance": "computed",
+      "reduced_formula": "SrHfO3"
+    },
+    {
+      "identifier": "cmp-0048",
+      "key": "In:1|Sb:1",
+      "note": "computed antimonide",
+      "provenance": "computed",
+      "reduced_formula": "InSb"
+    },
+    {
+      "identifier": "cmp-0008",
+      "key": "La:1|O:3|Sc:1",
+      "note": "computed perovskite",
+      "provenance": "computed",
+      "reduced_formula": "LaScO3"
+    },
+    {
+      "identifier": "cmp-0020",
+      "key": "Li:1|Mn:1|O:4|P:1",
+      "note": "computed olivine",
+      "provenance": "computed",
+      "reduced_formula": "LiMnPO4"
+    },
+    {
+      "identifier": "cmp-0022",
+      "key": "Li:1|Ni:1|O:4|P:1",
+      "note": "computed olivine",
+      "provenance": "computed",
+      "reduced_formula": "LiNiPO4"
+    },
+    {
+      "identifier": "cmp-0016",
+      "key": "Li:2|Mn:1|O:3",
+      "note": "computed layered oxide",
+      "provenance": "computed",
+      "reduced_formula": "Li2MnO3"
+    },
+    {
+      "identifier": "cmp-0017",
+      "key": "Li:2|O:3|Ti:1",
+      "note": "computed layered oxide",
+      "provenance": "computed",
+      "reduced_formula": "Li2TiO3"
+    },
+    {
+      "identifier": "cmp-0018",
+      "key": "Li:2|O:3|Zr:1",
+      "note": "computed layered oxide",
+      "provenance": "computed",
+      "reduced_formula": "Li2ZrO3"
+    },
+    {
+      "identifier": "cmp-0038",
+      "key": "Mg:1|O:3|Ti:1",
+      "note": "computed titanate",
+      "provenance": "computed",
+      "reduced_formula": "MgTiO3"
+    },
+    {
+      "identifier": "cmp-0051",
+      "key": "Mg:1|Se:1",
+      "note": "computed selenide",
+      "provenance": "computed",
+      "reduced_formula": "MgSe"
+    },
+    {
+      "identifier": "cmp-0024",
+      "key": "Mn:1|Na:1|O:4|P:1",
+      "note": "computed sodium olivine",
+      "provenance": "computed",
+      "reduced_formula": "NaMnPO4"
+    },
+    {
+      "identifier": "cmp-0041",
+      "key": "Mn:1|O:3|Ti:1",
+      "note": "computed titanate",
+      "provenance": "computed",
+      "reduced_formula": "MnTiO3"
+    },
+    {
+      "identifier": "cmp-0036",
+      "key": "Mo:1|O:2",
+      "note": "computed molybdenum dioxide",
+      "provenance": "computed",
+      "reduced_formula": "MoO2"
+    },
+    {
+      "identifier": "cmp-0043",
+      "key": "N:1|O:1|Ta:1",
+      "note": "computed oxynitride",
+      "provenance": "computed",
+      "reduced_formula": "TaON"
+    },
+    {
+      "identifier": "cmp-0034",
+      "key": "Nb:1|O:2",
+      "note": "computed niobium dioxide",
+      "provenance": "computed",
+      "reduced_formula": "NbO2"
+    },
+    {
+      "identifier": "cmp-0014",
+      "key": "Nb:1|O:6|Sc:1|Sr:2",
+      "note": "computed double perovskite",
+      "provenance": "computed",
+      "reduced_formula": "Sr2ScNbO6"
+    },
+    {
+      "identifier": "cmp-0040",
+      "key": "Ni:1|O:3|Ti:1",
+      "note": "computed titanate",
+      "provenance": "computed",
+      "reduced_formula": "NiTiO3"
+    },
+    {
+      "identifier": "cmp-0028",
+      "key": "O:1|Ti:1",
+      "note": "computed titanium monoxide",
+      "provenance": "computed",
+      "reduced_formula": "TiO"
+    },
+    {
+      "identifier": "cmp-0033",
+      "key": "O:2|V:1",
+      "note": "computed vanadium dioxide",
+      "provenance": "computed",
+      "reduced_formula": "VO2"
+    },
+    {
+      "identifier": "cmp-0002",
+      "key": "O:3|Sc:1|Sr:1",
+      "note": "hypothetical perovskite, computed entry",
+      "provenance": "computed",
+      "reduced_formula": "SrScO3"
+    },
+    {
+      "identifier": "cmp-0010",
+      "key": "O:3|Sc:1|Y:1",
+      "note": "computed perovskite",
+      "provenance": "computed",
+      "reduced_formula": "YScO3"
+    },
+    {
+      "identifier": "cmp-0005",
+      "key": "O:3|Sr:1|Zr:1",
+      "note": "computed perovskite",
+      "provenance": "computed",
+      "reduced_formula": "SrZrO3"
+    },
+    {
+      "identifier": "cmp-0037",
+      "key": "O:3|Ti:1|Zn:1",
+      "note": "computed titanate",
+      "provenance": "computed",
+      "reduced_formula": "ZnTiO3"
+    },
+    {
+      "identifier": "cmp-0029",
+      "key": "O:3|Ti:2",
+      "note": "computed titanium sesquioxide",
+      "provenance": "computed",
+      "reduced_formula": "Ti2O3"
+    },
+    {
+      "identifier": "cmp-0032",
+      "key": "O:3|V:2",
+      "note": "computed vanadium sesquioxide",
+      "provenance": "computed",
+      "reduced_formula": "V2O3"
+    },
+    {
+      "identifier": "cmp-0026",
+      "key": "O:4|Si:1|Sr:2",
+      "note": "computed silicate",
+      "provenance": "computed",
+      "reduced_formula": "Sr2SiO4"
+    },
+    {
+      "identifier": "cmp-0035",
+      "key": "O:5|Ta:2",
+      "note": "computed tantalum pentoxide",
+      "provenance": "computed",
+      "reduced_formula": "Ta2O5"
+    },
+    {
+      "identifier": "cmp-0030",
+      "key": "O:5|Ti:3",
+      "note": "computed Magneli phase",
+      "provenance": "computed",
+      "reduced_formula": "Ti3O5"
+    },
+    {
+      "identifier": "cmp-0031",
+      "key": "O:7|Ti:4",
+      "note": "computed Magneli phase",
+      "provenance": "computed",
+      "reduced_formula": "Ti4O7"
+    },
+    {
+      "identifier": "cmp-0049",
+      "key": "Se:1|Zn:1",
+      "note": "computed selenide",
+      "provenance": "computed",
+      "reduced_formula": "ZnSe"
+    },
+    {
+      "identifier": "cmp-0050",
+      "key": "Te:1|Zn:1",
+      "note": "computed telluride",
+      "provenance": "computed",
+      "reduced_formula": "ZnTe"
+    }
+  ],
+  "evidence_class": "computed",
+  "kind": "snapshot",
+  "license": "CC0-1.0 (hand-authored, no third-party data)",
+  "n_entries": 55
+}
